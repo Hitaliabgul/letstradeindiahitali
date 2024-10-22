@@ -1,0 +1,25 @@
+.page{
+    margin: 20px;
+}
+.cover{
+    display: flex;
+    height: 300px;
+    width: 100%;
+    border-radius: 5px;
+    background-image: url(./dashimages/cover.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background: linear-gradient(to top, #FFFFFF, rgb(255, 255, 255), rgba(255,255,255,0.7), rgba(255,255,255,0.4), rgba(255,255,255,0)); */
+    align-items: flex-end;
+}
+.profilePic{
+    z-index: 10;
+    position: relative;
+    left: 30px;
+    top: 70px;
+    height: 200px;
+    width: 200px;
+    border: solid 5px white;
+    border-radius: 50%;
+    
+}
