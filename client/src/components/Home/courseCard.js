@@ -13,14 +13,7 @@ const courseCard = [
     price: "₹2,999",
     courseUrl:'/course2'
   },
-  {
-    id: 2,
-    img: "Images/image-4.jpg",
-    title: "Combined",
-    price: "₹6,999",
-    courseUrl:'/course3'
-  },
- 
+
 ];
 
 export default courseCard;

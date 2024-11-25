@@ -73,12 +73,12 @@ const ImageSlider = ({ slides }) => {
   return (
     <div style={sliderStyles}>
       <div>
-        {/* <div onClick={goToPrevious} style={leftArrowStyles}>
+         <div onClick={goToPrevious} style={leftArrowStyles}>
           ❰
         </div>
         <div onClick={goToNext} style={rightArrowStyles}>
           ❱
-        </div> */}
+        </div> 
       </div>
       <div style={slideStylesWidthBackground}></div>
       <div style={dotsContainerStyles}>

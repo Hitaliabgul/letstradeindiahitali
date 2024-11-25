@@ -126,7 +126,7 @@ transition: transform 0.6s ease-in-out;
   display: none;
   left:100%;
 }
-z-index: 100;
+z-index: 9; /*i have change this z index to 9 previous was 100*/
 ${props =>
     props.signinIn !== true ? `transform: translateX(-100%); left:40%;` : null}
 `;

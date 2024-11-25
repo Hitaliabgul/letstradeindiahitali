@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as Components from './Components.js';
-import { useNavigate, useSearchParams} from "react-router-dom";
+import { Link, useNavigate, useSearchParams} from "react-router-dom";
 
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
@@ -53,41 +53,41 @@ function LoginReg({ handleLogin }) {
                         
                     }, 4000);
                     let purpose;
-                    // if (course) {
-                    //     let amount;
-                    //     if (course === "Future") {
-                    //         amount = 2999;
-                    //         purpose= "Future & Options"
-                    //     }
-                    //     if (course === "InstitutionFootprints") {
-                    //         amount = 4999;
-                    //         purpose= "Institution Footprints"
-                    //     }
-                    //     if (course === "Combined") {
-                    //         amount = 6999;
-                    //         purpose="Combined"
+                    if (course) {
+                        let amount;
+                        if (course === "Future") {
+                            amount = 2999;
+                            purpose= "Future & Options"
+                        }
+                        if (course === "InstitutionFootprints") {
+                            amount = 4999;
+                            purpose= "Institution Footprints"
+                        }
+                        if (course === "Combined") {
+                            amount = 6999;
+                            purpose="Combined"
                             
-                    //     }
-                    //     const info = {
-                    //         purpose: purpose,
-                    //         amount: amount,
-                    //         buyer_name: User.name,
-                    //         email: User.email,
-                    //         phone: User.phone,
-                    //         redirect_url: `https://testlt.onrender.com/payment/callback?user_id=${User._id}`,
-                    //         webhooks_url: '/webhook/'
-                    //     };
-                    //     try {
-                    //         const paymentRes = await axios.post('https://testlt.onrender.com/payment', info);
-                    //         console.log('payment_request', paymentRes.data);
-                    //         window.location.href = paymentRes.data;
-                    //     } catch (paymentError) {
-                    //         console.error(paymentError);
-                    //         toast.error("An error occurred during payment.");
-                    //     }
-                    // } else {
-                    //     history('/dashboard');
-                    // }
+                        }
+                        const info = {
+                            purpose: purpose,
+                            amount: amount,
+                            buyer_name: User.name,
+                            email: User.email,
+                            phone: User.phone,
+                            redirect_url: `https://testlt.onrender.com/payment/callback?user_id=${User._id}`,
+                            webhooks_url: '/webhook/'
+                        };
+                        try {
+                            const paymentRes = await axios.post('https://testlt.onrender.com/payment', info);
+                            console.log('payment_request', paymentRes.data);
+                            window.location.href = paymentRes.data;
+                        } catch (paymentError) {
+                            console.error(paymentError);
+                            toast.error("An error occurred during payment.");
+                        }
+                    } else {
+                        history('/dashboard');
+                    }
                     history('/dashboard');
                 } else {
                     toast.error(loginRes.data.message);
@@ -118,7 +118,7 @@ function LoginReg({ handleLogin }) {
             if (name && email && password && phone) {
                 try {
                    // const res = await axios.post('https://testlt.onrender.com/reg', user);
-                   const res = await axios.post('http://localhost:5000/api/auth/register', user); 
+                  const res = await axios.post('http://localhost:5000/api/auth/register', user); 
                    if (res.data === 'User already exists') {
                         toast.error('User already exists');
                     } else {
@@ -131,35 +131,35 @@ function LoginReg({ handleLogin }) {
                                 if (loginRes.data.user) {
                                     const User = loginRes.data.user;
                                     handleLogin(User);
-                                    // if (course) {
-                                    //     let amount;
-                                    //     if (course === "Future") {
-                                    //         amount = 2999;
-                                    //     }
-                                    //     if (course === "InstitutionFootprints") {
-                                    //         amount = 4999;
-                                    //     }
-                                    //     if (course === "Combined") {
-                                    //         amount = 6999;
-                                    //     }
-                                    //     const info = {
-                                    //         purpose: course,
-                                    //         amount: amount,
-                                    //         buyer_name: user.name,
-                                    //         email: user.email,
-                                    //         phone: user.phone,
-                                    //         redirect_url: `https://testlt.onrender.com/payment/callback?user_id=${User._id}`,
-                                    //         webhooks_url: '/webhook/'
-                                    //     };
-                                    //     try {
-                                    //         const paymentRes = await axios.post('https://testlt.onrender.com/payment', info);
-                                    //         console.log('payment_request', paymentRes.data);
-                                    //         window.location.href = paymentRes.data;
-                                    //     } catch (paymentError) {
-                                    //         console.error(paymentError);
-                                    //         toast.error("An error occurred during payment.");
-                                    //     }
-                                    // }
+                                    if (course) {
+                                        let amount;
+                                        if (course === "Future") {
+                                            amount = 2999;
+                                        }
+                                        if (course === "InstitutionFootprints") {
+                                            amount = 4999;
+                                        }
+                                        if (course === "Combined") {
+                                            amount = 6999;
+                                        }
+                                        const info = {
+                                            purpose: course,
+                                            amount: amount,
+                                            buyer_name: user.name,
+                                            email: user.email,
+                                            phone: user.phone,
+                                            redirect_url: `https://testlt.onrender.com/payment/callback?user_id=${User._id}`,
+                                            webhooks_url: '/webhook/'
+                                        };
+                                        try {
+                                            const paymentRes = await axios.post('https://testlt.onrender.com/payment', info);
+                                            console.log('payment_request', paymentRes.data);
+                                            window.location.href = paymentRes.data;
+                                        } catch (paymentError) {
+                                            console.error(paymentError);
+                                            toast.error("An error occurred during payment.");
+                                        }
+                                    }
                                     history('/dashboard');
                                 } else {
                                     toast.error(loginRes.data.message);
@@ -217,7 +217,10 @@ function LoginReg({ handleLogin }) {
                         <Components.Input type='email' placeholder='Email' value={email} onChange={(e) =>{ setEmail(e.target.value.toLowerCase())}} />
                         <Components.Input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
                         {/* <Components.Anchor href='#'>Forgot your password?</Components.Anchor> */}
-                        
+                       {/* Link to Update Password */}
+      <Link to="/forgotpassword" className="text-blue-500 hover:underline">
+        Forgot Password?
+      </Link>
                         {loading ? ( // Conditionally render a loading screen
                             <Components.Button
                                 onClick={console.log("wait")}
@@ -269,3 +272,4 @@ function LoginReg({ handleLogin }) {
 }
 
 export default LoginReg;
+

@@ -7,7 +7,8 @@ import img2 from "./image-2.jpg";
 import img3 from "./image-3.png";
 import img4 from "./image-4.jpg";
 import { useSearchParams } from "react-router-dom";
-
+import Middle from "../Middle";
+import Steps from "../Steps";
 function createCard(coursep) {
   return (
     <Card
@@ -53,9 +54,9 @@ function Home() {
 
   const slides = [
     { url: img4, title: "logo" },
-    // { url: img1, title: "beach" },
-    // { url: img2, title: "boat" },
-    // { url: img3, title: "forest" },
+     { url: img1, title: "beach" },
+     { url: img2, title: "boat" },
+     { url: img3, title: "forest" },
   ];
 
   const containerStyles = {
@@ -91,7 +92,7 @@ function Home() {
             </dl>
           </div>
 
-          {/* <div className="flex flex-col items-center text-center">
+          <div className="flex flex-col items-center text-center">
             <div
               style={titleStyles}
               className="m-8 h-auto rounded-none font-mulish text-4xl font-bold leading-tight tracking-normal text-[rgba(45, 85, 47, 1)] max-sm:text-xl max-sm:w-72 max-sm:m-2"
@@ -108,11 +109,11 @@ function Home() {
             >
               HOW DOES IT WORK?
             </div>
-            <div style={paraStyle} className="max-sm:text-xl max-sm:w-72 max-sm:m-2">
+            <div className="max-sm:text-xl max-sm:w-72 max-sm:m-2">
               Here are simple steps to start your journey with LTI
             </div>
             <Steps />
-          </div> */}
+          </div> 
         </div>
       </div>
     </>
@@ -120,3 +121,4 @@ function Home() {
 }
 
 export default Home;
+

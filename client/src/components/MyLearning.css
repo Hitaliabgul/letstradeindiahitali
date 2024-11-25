@@ -1,0 +1,48 @@
+.learning-page {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .thumbnail {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover ;
+  }
+  
+  
+  h3 {
+    /*text-align: center;*/
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+
+  

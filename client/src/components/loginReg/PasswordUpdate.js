@@ -18,13 +18,16 @@ function PasswordUpdate() {
 
     try {
       // Send a request to your Express backend to update the password
-      const response = await axios.put('https://testlt.onrender.com/updatePassword', formData);
+      //const response = await axios.put('https://testlt.onrender.com/updatePassword', formData);
+      const response = await axios.put('http://localhost:5000/api/auth/updatePassword', formData);
+
       console.log(response.data);
       toast.success("Password Updated Successfully")
 
-      setTimeout(() => {
+    
+     /* setTimeout(() => {
         window.location.href = "https://letstradeindia.co/#/dashboard";
-      }, 2000);
+      }, 2000);*/
     } catch (error) {
       console.error('Error updating password:', error);
       toast.error(error)
@@ -81,3 +84,4 @@ function PasswordUpdate() {
 }
 
 export default PasswordUpdate;
+

@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 body {
-  background-color: #0f0f0f;
+  background-color: white;
 }
+
+
 
 /* card component on home page */
 .dictionary {
@@ -185,6 +189,19 @@ body {
 .box2:hover {
   transform: rotatey(60deg);
 } */
+
+/* Hide the spinner arrows for number inputs of contact us page */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* For Firefox */
+}
+
+
 .container {
   perspective: 600px;
 
@@ -506,3 +523,303 @@ p {
 }
 
 /* edit user */
+
+
+/*from here i have applied my css here below css for contact us input field floating element*/
+/* Container for label and input */
+.form-group {
+  position: relative;
+  margin-top: 4px;
+}
+
+/* Styling the input field */
+.floating-input {
+  padding: 12px 9px 9px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  outline: none;
+  border-radius: 4px;
+}
+
+/* Initially place the label over the input */
+.floating-label {
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  color: #aaa;
+  font-size: 15px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background-color: white;
+  padding: 0 4px;
+}
+
+/* Move label to top border when input is focused or has text */
+.floating-input:focus + .floating-label,
+.floating-input:not(:placeholder-shown) + .floating-label {
+  top: -10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Hide placeholder when input is focused */
+.floating-input:focus::placeholder {
+  color: transparent;
+}
+/*added font size for requestphyicalnotes.js section part input fields*/
+.reqphyfont{
+  font-size: 17px;
+  padding: 9px;
+}
+
+/* Media Query for Smaller Devices */
+@media (max-width: 600px) {
+  .floating-input {
+    font-size: 10px; /* Smaller font size for input */
+    padding: 10px 12px 6px; /* Adjust padding for smaller screens */
+  }
+  
+  .floating-label {
+    font-size: 10px; /* Smaller font size for label */
+    top: 10px; /* Adjust position for smaller screens */
+  }
+  .floating-input:focus + .floating-label,
+  .floating-input:not(:placeholder-shown) + .floating-label {
+    top: -10px;
+    font-size: 10px;
+    color: #333;
+  }
+  .reqphyfont{
+    font-size: 14px;
+    padding: 12px;
+    margin: 3px;
+  }
+}
+
+@media (max-width: 600px) {
+.cross{
+  top: 8px;
+right: 8px;
+
+}
+.fatimeicon{
+  font-size: 15px;
+}
+}
+
+/* styling for scrollable animation in smaller devices*/
+/* Modal overlay */
+/* Modal base style */
+.modal-container {
+  max-height: 90vh;
+}
+
+/* Scrollable only on smaller screens */
+@media (max-width: 768px) {
+  .modal-container {
+    overflow-y: auto;
+  }
+}
+
+/* added notes css which of card component */
+
+.main-notes-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px; /* Adjust spacing between sections */
+  margin: 20px;
+}
+
+.notes-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.notes-card-container {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.vertical-divider {
+  width: 1px;
+  height: 350px;
+  background-color: rgb(125, 121, 121);
+  margin-left: 41px;
+}
+/* Hide the divider on small and medium screens */
+@media (max-width: 768px) {
+  .vertical-divider {
+    display: none;
+  }
+}
+
+
+.notes-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+padding: 5px;
+padding-bottom: 10px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  
+}
+
+.notes-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;  
+  border-radius: 4px;
+  margin-bottom: 5px;
+  
+}
+
+.download-button {
+  background-color: rgb(61, 60, 60);
+  color: white;
+  padding: 8px 16px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.download-button:hover {
+  background-color: #0056b3;
+}
+
+.notes-topheader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  text-align: center; /* Center text within each line */
+  padding: 30px;
+  margin-bottom: 20px;
+  background-color: #f7f7f7; /* Optional: background color for emphasis */
+  color: #333; /* Adjust color for readability */
+  font-family: Arial, sans-serif; /* Choose a clean font */
+}
+
+.notes-head2{
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+.request-notes {
+  text-align: center;  /* Centers the content horizontally */
+  padding: 30px 20px;  /* Adds padding around the content */
+  background-color: #f5f5f5;  /* Light grey background for the section */
+  border-radius: 8px;  /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Light shadow for depth */
+}
+
+.request-notes h2 {
+  font-size: 25px;  /* Larger font size for the title */
+  font-weight: semibold;  /* Bold title */
+  color: #2c3e50;  /* Dark text color for contrast */
+  margin-bottom: 10px;  /* Space below the title */
+}
+
+.request-notes p {
+  font-size: 18px;  /* Smaller font size for the subtitle */
+  color: #7f8c8d;  /* Lighter text color for the subtitle */
+  font-style: italic; 
+  margin-bottom: 20px;  /* Space below the title */
+
+}
+
+
+
+.physical-notes-request-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full height of the viewport */
+  background-color: #f0f0f0; /* Light background color */
+}
+
+.physical-notes-box {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 600px;
+  max-width: 100%;
+  margin-top: 20px;
+}
+
+.physical-notes-box h2 {
+  text-align: center;
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.physical-notes-box input,
+.physical-notes-box textarea,
+.physical-notes-box select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.physical-notes-box textarea {
+  height: 100px;
+}
+
+.physical-notes-box button {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.physical-notes-box button:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+.physical-notes-box select {
+  font-size: 1rem;
+}
+.terms {
+  display: flex;
+  margin: 2px;
+  padding: 2%;
+
+ }
+ .terms input{
+  transform: scale(1.9);
+ }
+ .termss{
+  font-size: 17px;
+padding: 10px;
+
+}
+@media (max-width: 768px) {
+  
+  .terms input{
+    transform: scale(1);
+   }
+   .termss{
+    font-size: 13px;
+  padding: 2px;
+  
+  }
+}
+
+
+  

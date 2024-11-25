@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Course1(data) {
 
-  return (
+  return (  
     <>
 
       <div className="flex justify-around pb-4 py-8 pt-20 max-sm:flex-col max-sm:p-0 max-sm:items-center">
@@ -51,7 +51,7 @@ export default function Course1(data) {
           </div>
 
           <div className="flex flex-row flex-wrap p-3 pt-6">
-            <Link to="/reg?course=InstitutionFootprints" className="bg-[#327E36] hover:bg-[#1E2A55] text-white font-bold py-2 px-4 border-b-4 border-[#327E36] hover:border-[#1E2A55] rounded-xl max-sm:justify-center">
+            <Link to="/register?course=InstitutionFootprints" className="bg-[#327E36] hover:bg-[#1E2A55] text-white font-bold py-2 px-4 border-b-4 border-[#327E36] hover:border-[#1E2A55] rounded-xl max-sm:justify-center">
               Buy Now
             </Link>
           </div>

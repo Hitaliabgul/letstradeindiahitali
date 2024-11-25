@@ -17,7 +17,7 @@ function HomeMain() {
 
   return (
     <div>
-      <Header />
+     {/*<Header />*/} 
       <div className="flex w-screen">
         <Navbar />
         <div className="overflow-y-scroll h-[91vh] w-full" ref={innerScrollRef}>

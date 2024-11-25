@@ -9,6 +9,7 @@ function createCard(coursep) {
       title={coursep.title}
       price={coursep.price}
       offer={coursep.offer}
+      courseUrl={coursep.courseUrl}
     />
   );
 }
@@ -55,6 +56,7 @@ function Courses() {
             <dl className="justify-center dictionary flex">
               {CourseCard.map(createCard)}
             </dl>
+            
           </div>
         </div>
       </div>

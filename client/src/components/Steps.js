@@ -1,9 +1,9 @@
 import React from "react";
-import Stock from "../../svgs/stock";
-import Stock2 from "../../svgs/stock2";
-import Stock3 from "../../svgs/stock3";
-import Stock4 from "../../svgs/stock4";
-export default function steps() {
+import Stock from "../svgs/stock";
+import Stock2 from "../svgs/stock2";
+import Stock3 from "../svgs/stock3";
+import Stock4 from "../svgs/stock4";
+export default function Steps() {
   return (
     <>
 

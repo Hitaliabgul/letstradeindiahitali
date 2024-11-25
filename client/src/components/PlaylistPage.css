@@ -1,0 +1,149 @@
+/* General container for the Playlist Page */
+.playlist-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+/* Container for all playlist cards */
+.playlist-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 1300px; /* To limit the width */
+}
+
+/* Style for each individual playlist card */
+.playlist-card {
+  display: flex;
+  flex-direction: row; /* Row layout */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+
+
+/* Content area of the playlist card */
+.playlist-card-content {
+  display: flex;
+  flex-direction: row; /* Align image and content in a row */
+  gap: 20px; /* Space between image and content */
+  width: 100%;
+}
+
+/* Image container for the playlist thumbnail */
+.playlist-image-container {
+  flex-shrink: 0;
+  width: 200px; /* Fixed width for image */
+  height: auto; /* Fixed height for image */
+  overflow: hidden;
+  
+}
+
+/* Thumbnail image styling */
+.playlist-thumbnail {
+  width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* Info section containing title, description, and playlist count */
+.playlist-info-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+    height: 100%; /* Ensure the container takes up full height */
+
+}
+
+/* Title style */
+.playlist-card h3 {
+  
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Description style */
+.playlist-description {
+  margin-left: 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Playlist count box at the bottom-right */
+.playlist-count {
+  margin-top: 10px;
+  background-color: #f0f0f0;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  align-self: flex-end; /* Align this item to the end of the container */
+}
+
+/* Overlay that appears when hovering over the card */
+.playlist-play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: opacity 0.3s;
+  z-index: 1;
+
+}
+.playlist-card:hover .playlist-play-overlay {
+  opacity: 1;
+}
+
+.playlist-play-overlay .playlist-play-icon {
+  margin-right: 10px;
+  font-size: 1.1em;
+}
+
+
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .playlist-card {
+    flex-direction: column; /* Stack image and content vertically */
+    align-items: center; /* Center content */
+  }
+
+  .playlist-image-container {
+    width: 100px;
+    height: 100px;
+  }
+
+  .playlist-info-container {
+    text-align: center;
+  }
+
+  .playlist-thumbnail {
+    width: 100%;
+    height: 100%;
+  }
+
+  .playlist-count {
+    margin-top: 10px;
+    align-self: center; /* Center the playlist count on small screens */
+  }
+}
