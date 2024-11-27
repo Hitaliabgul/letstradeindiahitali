@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaStickyNote, FaTimes } from 'react-icons/fa';
+import { FaAward, FaStickyNote, FaTimes } from 'react-icons/fa';
 import { FaEnvelope } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
@@ -130,6 +130,11 @@ toast.info("Processing your request...");
       path: '/about',
       name: 'About',
       icon: <FaInfoCircle />,
+    },
+    {
+      path: '/reviews',
+      name: 'Reviews',
+      icon: <FaAward />,
     },
     {
       name: 'Contact Us',

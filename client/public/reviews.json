@@ -1,0 +1,48 @@
+[
+  {
+    "id": 1,
+    "name": "Hitali Abgul",
+    "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "image": "https://i.pravatar.cc/150?img=1",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "profession": "Housewife"
+  },
+  {
+    "id": 2,
+    "name": "Hitali Abgul",
+    "review": "Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+    "image": "https://i.pravatar.cc/150?img=2",
+    "city": "Los Angeles",
+    "state": "Maharashtra",
+    "profession": "Architect"
+  },
+  {
+    "id": 3,
+    "name": "Hitali Abgul",
+    "review": "Class aptent taciti sociosqu ad litora torquent per conubia nostra.",
+    "image": "https://i.pravatar.cc/150?img=3",
+    "city": "Chicago",
+    "state": "Maharashtra",
+    "profession": "Designer"
+  },
+  {
+    "id": 4,
+    "name": "Hitali Abgul",
+    "review": "Class aptent taciti sociosqu ad litora torquent per conubia nostra.",
+    "image": "https://i.pravatar.cc/150?img=3",
+    "city": "Chicago",
+    "state": "IL",
+    "profession": "Designer"
+  },
+  {
+    "id": 5,
+    "name": "Hitali Abgul",
+    "review": "Class aptent taciti sociosqu ad litora torquent per conubia nostra.",
+    "image": "https://i.pravatar.cc/150?img=3",
+    "city": "Chicago",
+    "state": "IL",
+    "profession": "Designer"
+  }
+  
+]

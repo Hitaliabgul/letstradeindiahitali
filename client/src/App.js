@@ -22,6 +22,7 @@ import PhysicalNotesRequest from "./components/PhysicalNotesRequest";
 //import CommentSection from "./components/discussion/discussion";
 import MyLearning from "./components/MyLearning";
 import PlaylistPage from "./components/PlaylistPage";
+import Reviews from "./components/Review/Reviews";
 function App() {
   const [user, setUser] = useState(null);
   const [cookie, setCookie] = useState(null);
@@ -79,7 +80,7 @@ function App() {
           <Route path="/request-physical-notes" element={<PhysicalNotesRequest/>} />
           <Route path="/playlist" element={<PlaylistPage />} />
       <Route path="/playlist/mylearning" element={<MyLearning />} />
-    
+    <Route path="reviews" element={<Reviews />}></Route>
         </Route>
       </Routes>
     </HashRouter>

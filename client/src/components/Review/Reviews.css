@@ -1,0 +1,140 @@
+.reviews-container {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f0f9f7; /* Matches the background in the design */
+  }
+  
+  .reviews-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .reviews-description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 2rem;
+  }
+  
+  .reviews-list {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .review-card {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 16px;
+  }
+  
+  .review-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid white;
+  }
+  
+  .review-name {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2c7873;
+    margin-top: 50px; /* Space for the avatar */
+  }
+  
+  .review-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 10px;
+    line-height: 1.4;
+  }
+  
+  .review-details {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: #555;
+    display: flex;
+    
+  }
+  
+  .review-details i {
+    color: #2c7873;
+    margin-right: 2px;
+   
+  }
+  
+  .review-location,
+  .review-state,
+  .review-profession {
+   
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 5px 0;
+    white-space: nowrap;    /* Prevent text wrapping */
+    overflow: hidden;       /* Hide overflow text */
+    text-overflow: ellipsis; /* Add "..." for long text */
+    max-width: 200px;       /* Adjust based on your layout */
+  padding: 5px;
+
+  }
+  
+  .review-role {
+    font-size: 0.8rem;
+    color: #aaa;
+  }
+  
+  .reviews-navigation {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .reviews-nav-btn {
+    background: #2c7873;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .reviews-nav-btn:hover {
+    background: #25655f;
+  }
+  
+  .read-more-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    text-decoration: underline;
+}
+
+.read-more-btn:hover {
+    color: #0056b3;
+}
