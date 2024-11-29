@@ -1,140 +1,255 @@
 .reviews-container {
     text-align: center;
     padding: 2rem;
-    background-color: #f0f9f7; /* Matches the background in the design */
-  }
-  
-  .reviews-title {
+   
+}
+
+.reviews-title {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
     color: #333;
-  }
-  
-  .reviews-description {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 2rem;
-  }
-  
-  .reviews-list {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-  .review-card {
+}
+
+.reviews-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden; /* Ensure that only part of the next card is visible */
+}
+
+
+.review-card {
     position: relative;
     background: white;
     border-radius: 16px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    width: 300px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    padding: 3rem 2rem 2rem; 
+    width: 700px; /* Increased width */
+    margin: 100px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-top: 40px;
-    font-size: 16px;
-  }
-  
-  .review-avatar {
-    width: 80px;
-    height: 80px;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 1;
+    flex-shrink: 0; 
+}
+
+
+.next-card {
+  opacity: 0.5; /* Reduced opacity for the next card */
+  transform: translateX(80%); /* Shift the next card 80% to the right to show only 20% */
+  transition: transform 0.3s ease-in-out; /* Smooth transition for shifting the card */
+}
+
+.review-avatar {
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     position: absolute;
-    top: -40px;
+    top: -50px;
     left: 50%;
     transform: translateX(-50%);
     border: 4px solid white;
-  }
-  
-  .review-name {
-    font-size: 1rem;
+
+
+}
+.modalreview-avatar{
+  width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+}
+.modal-review-avatar{
+  width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+}
+.modal-below{
+  margin-top: 300px;
+}
+
+.review-name {
+    font-size: 1.5rem;
     font-weight: bold;
     color: #2c7873;
-    margin-top: 50px; /* Space for the avatar */
-  }
-  
-  .review-text {
-    font-size: 0.9rem;
-    color: #555;
     margin-top: 10px;
-    line-height: 1.4;
-  }
-  
-  .review-details {
-    margin-top: 10px;
-    font-size: 0.85rem;
-    color: #555;
-    display: flex;
-    
-  }
-  
-  .review-details i {
-    color: #2c7873;
-    margin-right: 2px;
-   
-  }
-  
-  .review-location,
-  .review-state,
-  .review-profession {
-   
-    font-size: 14px;
-    color: #555;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin: 5px 0;
-    white-space: nowrap;    /* Prevent text wrapping */
-    overflow: hidden;       /* Hide overflow text */
-    text-overflow: ellipsis; /* Add "..." for long text */
-    max-width: 200px;       /* Adjust based on your layout */
-  padding: 5px;
+}
 
-  }
-  
-  .review-role {
-    font-size: 0.8rem;
-    color: #aaa;
-  }
-  
-  .reviews-navigation {
+.review-text {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+.review-details {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #555;
+    display: flex;
+    gap: 2rem;
+   
+    justify-content: center;
+}
+
+.reviews-navigation {
     margin-top: 2rem;
     display: flex;
     justify-content: center;
     gap: 1rem;
-  }
-  
-  .reviews-nav-btn {
+}
+
+.reviews-nav-btn {
     background: #2c7873;
     color: white;
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
     cursor: pointer;
     transition: background 0.3s ease;
-  }
-  
-  .reviews-nav-btn:hover {
+}
+
+.reviews-nav-btn:hover {
     background: #25655f;
-  }
-  
-  .read-more-btn {
-    background: none;
-    border: none;
-    color: #007bff;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 10px;
-    text-decoration: underline;
+}
+
+/* Truncated text styling */
+.review-content-wrapper {
+  position: relative;
+}
+
+
+
+.read-more-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: underline;
 }
 
 .read-more-btn:hover {
-    color: #0056b3;
+  color: #0056b3;
 }
+
+/* Modal styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+ 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  max-width: 700px;
+  width: 90%;
+  max-height: 80vh; /* Restrict height to 80% of the viewport */
+  overflow-y: auto; /* Add vertical scroll if content overflows */
+  position: relative;
+  display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the content horizontally */
+    justify-content: center; /* Centers the content vertically */
+    text-align: center; /* Centers text if needed */
+    padding: 20px;
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  
+}
+
+.close-modal-btn:hover {
+  color: rgb(103, 99, 99);
+}
+/* General Swiper Slide Styles */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0.9); /* Slightly shrink inactive slides */
+  transition: transform 0.3s ease, z-index 0.3s ease;
+  z-index: 1; /* Default z-index for all slides */
+  opacity: 0.8; /* Dim inactive slides */
+}
+
+/* Center Slide (Active) */
+.swiper-slide-active {
+  transform: scale(1); /* Full size for the active slide */
+  z-index: 10; /* Bring to front */
+  opacity: 1; /* Full opacity for active slide */
+}
+
+/* Style for the active slide */
+.review-card.swiper-slide-active {
+  transform: scale(1.1); /* Slightly larger active slide */
+  transition: transform 0.3s ease; /* Smooth scaling transition */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow to highlight */
+}
+
+/* Style for adjacent slides (left and right) */
+.review-card.swiper-slide-next,
+.review-card.swiper-slide-prev {
+  transform: scale(0.9) translateX(2990%); /* Increase the translateX to create more gap */
+  opacity: 0.9; /* Dim the adjacent slides */
+  z-index: 5; /* Lower z-index for adjacent slides */
+}
+
+/* Hover effect for all slides */
+.review-card:hover {
+  transform: scale(1.1); /* Zoom in on hover */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Swiper Container */
+.swiper-container {
+  overflow: visible; /* Allow slides to overflow for layering effect */
+}
+
+
+/* Hover effect for all slides */
+.review-card:hover {
+  transform: scale(1.1); /* Zoom in on hover */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
