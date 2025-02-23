@@ -4,26 +4,13 @@ import './PlaylistPage.css';
 
 const playlists = [
   {
-    title: 'Supply & demand zone concept',
-    description: 'WILL BEARS OUTPERFORM BULLS? | NIFTY PREDICTION FOR TOMORROW | MARKET ANALYSIS FOR TOMORROW',
+    title: 'Supply & Demand Zone Concept',
+    description: '',
     totalPlaylists: 8,
     url: 'https://youtu.be/lZJKNUYdmtw?si=TPhYPbgyhCXBPrvX',
-    thumbnail: 'https://img.youtube.com/vi/lZJKNUYdmtw/0.jpg',
+    thumbnail: 'https://img.youtube.com/vi/NWooLoAisno/0.jpg',
   },
-  {
-    title: 'Supply & demand zone concept',
-    description: 'WILL BEARS OUTPERFORM BULLS? | NIFTY PREDICTION FOR TOMORROW | MARKET ANALYSIS FOR TOMORROW',
-    totalPlaylists: 8,
-    url: 'https://youtu.be/lZJKNUYdmtw?si=TPhYPbgyhCXBPrvX',
-    thumbnail: 'https://img.youtube.com/vi/lZJKNUYdmtw/0.jpg',
-  },
-  {
-    title: 'Supply & demand zone concept',
-    description: 'WILL BEARS OUTPERFORM BULLS? | NIFTY PREDICTION FOR TOMORROW | MARKET ANALYSIS FOR TOMORROW',
-    totalPlaylists: 8,
-    url: 'https://youtu.be/lZJKNUYdmtw?si=TPhYPbgyhCXBPrvX',
-    thumbnail: 'https://img.youtube.com/vi/lZJKNUYdmtw/0.jpg',
-  },
+ 
 ];
 
 const PlaylistPage = () => {

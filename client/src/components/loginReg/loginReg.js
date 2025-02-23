@@ -48,6 +48,10 @@ function LoginReg({ handleLogin }) {
               toast.success(loginRes.data.message);
                 if (loginRes.data.user) {
                     const User = loginRes.data.user;
+                       // Store user details and token in localStorage
+                //localStorage.setItem("user", JSON.stringify(User));
+                //localStorage.setItem("token", loginRes.data.token);
+
                     handleLogin(User);
                     setTimeout(() => {
                         
@@ -78,7 +82,7 @@ function LoginReg({ handleLogin }) {
                             webhooks_url: '/webhook/'
                         };
                         try {
-                            const paymentRes = await axios.post('https://testlt.onrender.com/payment', info);
+                            const paymentRes = await axios.post('http://localhost:5000/api/payment/order', info);
                             console.log('payment_request', paymentRes.data);
                             window.location.href = paymentRes.data;
                         } catch (paymentError) {
@@ -130,6 +134,8 @@ function LoginReg({ handleLogin }) {
                                 toast.success(loginRes.data.message);
                                 if (loginRes.data.user) {
                                     const User = loginRes.data.user;
+                                    localStorage.setItem("token", loginRes.data.token);
+
                                     handleLogin(User);
                                     if (course) {
                                         let amount;
@@ -152,7 +158,7 @@ function LoginReg({ handleLogin }) {
                                             webhooks_url: '/webhook/'
                                         };
                                         try {
-                                            const paymentRes = await axios.post('https://testlt.onrender.com/payment', info);
+                                            const paymentRes = await axios.post('http://localhost:5000/api/payment/order', info);
                                             console.log('payment_request', paymentRes.data);
                                             window.location.href = paymentRes.data;
                                         } catch (paymentError) {
@@ -181,6 +187,7 @@ function LoginReg({ handleLogin }) {
 
         setLoading(false);
     };
+    
     return (
         <div className="flex flex-col items-center justify-center h-[70vh] w-[100%] my-16">
             <ToastContainer className="sticky" />

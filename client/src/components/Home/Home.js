@@ -2,13 +2,10 @@ import React, { useEffect } from "react";
 import ImageSlider from "./ImageSlider";
 import Card from "./Card";
 import CourseCard from "./courseCard";
-import img1 from "./image-1.jpg";
-import img2 from "./image-2.jpg";
 import img3 from "./image-3.png";
 import img4 from "./image-4.jpg";
 import { useSearchParams } from "react-router-dom";
-import Middle from "../Middle";
-import Steps from "../Steps";
+
 function createCard(coursep) {
   return (
     <Card
@@ -29,39 +26,36 @@ function Home() {
   }, [searchParams]);
 
   useEffect(() => {
-    if(searchParams.size){
-    const sectionId = "section1";
-    const targetElement = document.getElementById(sectionId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
-    }
-    const scrollToSection = () => {
+    if (searchParams.size) {
+      const sectionId = "section1";
+      const targetElement = document.getElementById(sectionId);
       if (targetElement) {
         targetElement.scrollIntoView({ behavior: "smooth" });
       }
+      const scrollToSection = () => {
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: "smooth" });
+        }
+      };
+
+      window.onload = scrollToSection;
+
+      return () => {
+        window.onload = null;
+      }
     };
-
-    window.onload = scrollToSection;
-
-  return () => {
-    window.onload = null; }
-  };
 
   }, [searchParams]);
 
-  
-
-
   const slides = [
     { url: img4, title: "logo" },
-     { url: img1, title: "beach" },
-     { url: img2, title: "boat" },
-     { url: img3, title: "forest" },
+
+    { url: img3, title: "forest" },
   ];
 
   const containerStyles = {
     margin: "0 auto",
-    borderRadiusTop:"",
+    borderRadiusTop: "",
   };
 
   const titleStyles = {
@@ -77,7 +71,7 @@ function Home() {
             style={containerStyles}
             className="w-[90vw] h-[80vh] max-sm:w-[100vw] max-sm:h-[50vh] "
           >
-            <ImageSlider slides={slides}  className="slides-img"/>
+            <ImageSlider slides={slides} className="slides-img" />
           </div>
 
           <div className="flex flex-col justify-center items-center sel" id="section1">
@@ -85,14 +79,24 @@ function Home() {
               style={titleStyles}
               className="mt-8 h-auto rounded-none text-center font-mulish text-4xl font-bold leading-tight tracking-normal text-[#000]  max-sm:text-xl max-sm:w-72 max-sm:m-2"
             >
-              We Offer The Following Mentorship Programs
+              We Offer The Following Mentorship Program
             </div>
             <dl className="justify-center dictionary flex my-0 max-sm:mt-0">
               {CourseCard.map(createCard)}
             </dl>
           </div>
 
-          <div className="flex flex-col items-center text-center">
+
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Home;
+
+/*
+<div className="flex flex-col items-center text-center">
             <div
               style={titleStyles}
               className="m-8 h-auto rounded-none font-mulish text-4xl font-bold leading-tight tracking-normal text-[rgba(45, 85, 47, 1)] max-sm:text-xl max-sm:w-72 max-sm:m-2"
@@ -114,11 +118,4 @@ function Home() {
             </div>
             <Steps />
           </div> 
-        </div>
-      </div>
-    </>
-  );
-}
-
-export default Home;
-
+*/

@@ -1,8 +1,9 @@
 import React from 'react';
 import './MyLearning.css';  
 const videos = [
-  { title: '1. WILL BEARS OUTPERFORM BULLS? | NIFTY PREDICTION FOR TOMORROW | MARKET ANALYSIS FOR TOMORROW', url: 'https://youtu.be/lZJKNUYdmtw?si=TPhYPbgyhCXBPrvX', thumbnail: 'https://img.youtube.com/vi/lZJKNUYdmtw/0.jpg' },
-  { title: 'Nifty Media Sector Analysis | Why Nifty Media Sector is falling? | Nifty Media Sector Latest News.', url: 'https://youtu.be/zEPa4aM5-vs?si=y4WFnIbO31Jdb5dh', thumbnail: 'https://img.youtube.com/vi/zEPa4aM5-vs/0.jpg' },
+  { title: '1. What is Supply & Demand Zones? | How to draw Supply & Demand Zones? | What is DBR, RBR, RBD & DBD? | Part 1', url: 'https://www.youtube.com/live/NWooLoAisno?si=-NhhImF2v8mnfWNy', thumbnail: 'https://img.youtube.com/vi/NWooLoAisno/0.jpg' },
+  { title: '2. What is Supply & Demand Zones? | How to draw Supply & Demand Zones? | What is DBR, RBR, RBD & DBD? | Part 2', url: 'https://www.youtube.com/live/XfOgNBom0jk?si=fc2vxXhVRgzrPu5n', thumbnail: 'https://img.youtube.com/vi/XfOgNBom0jk/0.jpg' },
+
   { title: 'Video 3', url: 'https://www.youtube.com/watch?v=video3', thumbnail: 'https://img.youtube.com/vi/video3/0.jpg' },
   { title: 'Video 4', url: 'https://www.youtube.com/watch?v=video4', thumbnail: 'https://img.youtube.com/vi/video4/0.jpg' },
   { title: 'Video 5', url: 'https://www.youtube.com/watch?v=video5', thumbnail: 'https://img.youtube.com/vi/video5/0.jpg' },

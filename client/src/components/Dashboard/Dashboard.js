@@ -2,11 +2,13 @@ import React, { useState} from 'react';
 import { ReactComponent as CopyIcon } from './copy-icon.svg'; // Replace with your copy icon SVG
 import logoutImg from './logout.svg'
 import EditForm from './EditUser';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';  
+
 
 const Dashboard = ({ handleLogout, data }) => {
   const [isCopied, setIsCopied] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  
   const user = {
     _id:data._id,
     name: data.name,
@@ -18,10 +20,11 @@ const Dashboard = ({ handleLogout, data }) => {
     pincode: data.pincode,
     referralCode: data.Myrefer,
   };
+  console.log(user);
 
   const handleEditClick = () => {
     setIsEditing(true);
-    console.log(data)
+    console.log(data) 
   };
 
   const handleCancelEdit = () => {
@@ -29,10 +32,10 @@ const Dashboard = ({ handleLogout, data }) => {
   };
 
  
-
+  
   const handleCopyReferralCode = () => {
     if(user.referralCode){
-    let text = 'https://letstradeindia.co/#/?refer=' + user.referralCode
+    let text = 'http://localhost:3000/#/?refer=' + user.referralCode
     navigator.clipboard.writeText(text);
     setIsCopied(true);
     setTimeout(() => {
@@ -43,6 +46,7 @@ const Dashboard = ({ handleLogout, data }) => {
     }
   };
 
+  
   return (
     <div className="min-h-screen bg-black-100 py-6 flex flex-col justify-center sm:py-12 border-l-[rgb(50,50,50)] border-l-2">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -126,7 +130,7 @@ const Dashboard = ({ handleLogout, data }) => {
                     <p
                       className="text-gray-800 cursor-pointer"
                     >
-                      https://letstradeindia.co/#/?refer={user.referralCode}
+                      http://localhost:3000/#/?refer={user.referralCode}
                     </p>
                   ) : (
                     <p className='field'> Buy The Course First</p>

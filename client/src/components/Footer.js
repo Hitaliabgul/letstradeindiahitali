@@ -17,8 +17,9 @@ export default function Footer() {
             <div className="mb-5 ml-10">
               <h4 className="font-bold text-white text-xl pb-2"> Menu </h4>
               <ul>
-                <li className="pb-2"><Link to="#" className="hover:text-blue-800">Home</Link> </li>
-                <li className="pb-2"><Link to="/dashboard" className="hover:text-blue-800">Profile</Link></li>
+                <li className="pb-2"><Link to="/" className="hover:text-blue-800">Home</Link> </li>
+                <li className="pb-2"><Link to="/reviews" className="hover:text-blue-800">Reviews</Link></li>
+                <li className="pb-2"><Link to="/about" className="hover:text-blue-800">About</Link></li>
               </ul>
             </div>
             <div className="mb-5 ">

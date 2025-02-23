@@ -13,10 +13,12 @@ export default function TopAbout() {
           alt="Logo"
         />
         <div className="text-5xl font-bold text-indigo-900">LET’S TRADE INDIA</div>
+        {/*
         <p className="text-xl text-center text-green-900 font-medium py-4">
           Learn about Stock Market |
           <span className="text-indigo-900">Be Perfect</span>
         </p>
+        */}
       </div>
     </div>
   );

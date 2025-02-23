@@ -9,7 +9,9 @@ const userSchema = new mongoose.Schema({
   telegram: { type: String, default: '' },  // Add telegram field
   state: { type: String, default: '' },     // Add state field
   city: { type: String, default: '' },      // Add city field
-  referralCode: { type: String, default: '' },
+  referralCode: { type: String, default: '',unique: true, },
+  //referralLink: { type: String, required: true }, // Ensure referralLink is stored
+  //createdAt: { type: Date, default: Date.now },
   
   // Fields for password reset functionality
   resetPasswordToken: String,   // Store the reset token

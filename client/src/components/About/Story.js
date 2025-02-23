@@ -7,19 +7,15 @@ export default function Story() {
 
       <div className="flex flex-col md:flex-row justify-around items-center mt-10">
         <div className="py-6 md:pl-12 md:w-1/2">
-          <p className="text-xl">
-            LTI is a Share market education platform. Since March 24, 2020, we've been assisting learners of all ages
-            in learning the trendiest courses in any field with diversified bundles.
+          <p className="text-xl m-5">
+          Welcome to Let's Trade India, Established on 14th May 2020, we are dedicated to empowering individuals with the knowledge and skills needed to navigate the financial markets confidently.  
           </p>
 
-          <p className="mt-6 text-xl">
-            LTI keeps culture and learning at the root of everything it does. We’re entrenched in creating a difference.
-            Therefore, we strive to make a distinction in the way people approach entrepreneurship and education.
-          </p>
+          <p className="m-5 text-xl ">
+          Our core expertise lies in teaching the Supply and Demand Zone concepts, a proven set-up for understanding market trends and making informed trading decisions. At Let's Trade India, we simplify complex market dynamics, helping traders and investors achieve their financial goals.    </p>
 
-          <p className="mt-6 text-xl">
-            We deliver courses and bundles designed, created, and produced with real-world statistical data input for
-            the folks we highly believe in.
+          <p className="m-5 text-xl">
+          Join us to explore the world of trading, unlock new opportunities, and transform your financial future with clarity and confidence. Let’s trade smart, Let’s trade right, Let’s Trade India!
           </p>
         </div>
         <div className="flex items-center px-3">

@@ -28,7 +28,7 @@ const Navbar = () => {
   const [whatsappNumber, setWhatsappNumber] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
-
+  
   //submit button
   const [isSubmitting, setIsSubmitting] = useState(false);
   const toggleVisibility = () => {
@@ -249,7 +249,7 @@ toast.info("Processing your request...");
                   href="mailto:hitaliabgul@gmail.com"
                  
                 >
-                  Enquiry:<span  className="text-md font-semibold text-blue-500 hover:underline"> hitaliabgul@gmail.com</span>
+                  Enquiry:<span  className="text-md font-semibold text-blue-500 hover:underline"> letstradeindiaa@gmail.com</span>
                 </a>
               </div>
             </div>

@@ -10,9 +10,6 @@ import Courses from "./components/Courses/Courses";
 import Course1 from "./components/Courses/Course1";
 import Course2 from "./components/Courses/Course2";
 import Course3 from "./components/Courses/Course3";
-//import RegistrationForm from "./components/Home/registration";//this was commented i removed
-// import Login from "./components/Login"; //this was commented i removed
-import DiscussionSection from "./components/discussion/discussion";
 import LoginReg from "./components/loginReg/loginReg"
 //import PasswordUpdate from "./components/loginReg/PasswordUpdate"; earlier update password which was created
 import ForgotPassword from "./components/ForgotPassword";
@@ -23,17 +20,19 @@ import PhysicalNotesRequest from "./components/PhysicalNotesRequest";
 import MyLearning from "./components/MyLearning";
 import PlaylistPage from "./components/PlaylistPage";
 import Reviews from "./components/Review/Reviews";
+import PaymentSuccess from "./components/paymentSuccess";
+import RecordedPage from "./components/Courses/RecordedPage";
 function App() {
   const [user, setUser] = useState(null);
   const [cookie, setCookie] = useState(null);
 
-  /*useEffect(() => {
-     const storedUser = Cookies.get('user');
-     if (storedUser && storedUser!==undefined) {
-       setUser(JSON.parse(storedUser));
-     }
-   }, [cookie]);
-   */
+  useEffect(() => {
+    const storedUser = Cookies.get('user');
+    if (storedUser && storedUser !== undefined) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, [cookie]);
+
   useEffect(() => {
     // Check if user data is stored in cookies
     const storedUser = Cookies.get('user');
@@ -54,6 +53,8 @@ function App() {
   const handleLogout = () => {
     Cookies.remove('user');
     setUser(null);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   }
 
   return (
@@ -65,9 +66,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/courses" element={<Courses data={user} />} />
           <Route path="/course1" element={<Course1 data={user} />} />
-          <Route path="/Discussion" element={<DiscussionSection />} />
+          {/*<Route path="/Discussion" element={<DiscussionSection />} />*/}
           {/*<Route path="/reg" element={<RegistrationForm handleLogin={handleData} />} /> */}
-          
+
           <Route path="/course2" element={<Course2 data={user} />} />
           <Route path="/reg" element={<LoginReg handleLogin={handleData} />} />
           <Route path="/course3" element={<Course3 data={user} />} />
@@ -77,10 +78,12 @@ function App() {
           {/*<Route path="/login" element={<Login />} /> */}
           <Route path="/notes" element={<Notes />} />
           <Route path="/physical-notes" element={<Notes />} />
-          <Route path="/request-physical-notes" element={<PhysicalNotesRequest/>} />
+          <Route path="/request-physical-notes" element={<PhysicalNotesRequest />} />
           <Route path="/playlist" element={<PlaylistPage />} />
-      <Route path="/playlist/mylearning" element={<MyLearning />} />
-    <Route path="reviews" element={<Reviews />}></Route>
+          <Route path="/playlist/mylearning" element={<MyLearning />} />
+          <Route path="/reviews" element={<Reviews />}></Route>
+         <Route path="/paymentSuccess" element={<PaymentSuccess />}></Route>
+         <Route path="/recorded" element={<RecordedPage />} />
         </Route>
       </Routes>
     </HashRouter>

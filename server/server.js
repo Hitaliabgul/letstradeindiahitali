@@ -1,19 +1,17 @@
-const express = require('express');
+
 const mongoose = require('mongoose');
-const cors = require('cors');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
 const contactRoutes = require('./routes/contact'); // Import the contact route
-const path=require('path'); //this line is added yest
-
+const app=require("./app");
 dotenv.config();
 
-const app = express();
-const PORT = process.env.PORT || 5000;
 
+const PORT = process.env.PORT || 5000;
 // Middleware
-app.use(cors());
-app.use(express.json());
+
+// Payment verification endpoint
+const crypto = require('crypto');
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
@@ -29,7 +27,7 @@ app.use('/api/contact', contactRoutes); // Route for Contact Us form
 
 
 // Serve static files from the 'public' directory
-app.use('/public', express.static(path.join(__dirname, 'public')));   //this line added extra yest
+//app.use('/public', express.static(path.join(__dirname, 'public')));   //this line added extra yest
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

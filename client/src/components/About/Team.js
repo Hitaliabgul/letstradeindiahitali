@@ -3,6 +3,7 @@ import React from "react";
 export default function Team() {
   return (
     <div className="mt-10">
+      {/*
       <div className="text-4xl font-bold text-green-900 text-center">OUR TEAM</div>
 
       <div className="flex flex-col md:flex-row justify-center items-center mt-10">
@@ -16,6 +17,7 @@ export default function Team() {
           <p className="text-xl font-medium text-center">Founder</p>
         </div>
       </div>
+      */}
     </div>
   );
 }

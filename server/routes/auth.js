@@ -52,6 +52,15 @@ router.post('/login', async (req, res) => {
 
     // Generate and send token if login is successful
     const token = generateToken(user._id);
+
+    // Store token or user info in cookie with httpOnly flag
+    res.cookie('user', token, {
+      httpOnly: true,  // Cookie cannot be accessed by JS
+      secure: false,//process.env.NODE_ENV === 'production',  // HTTPS only in production
+      sameSite: 'strict',
+      maxAge: 3600000,  // Set cookie expiry time (1 hour)
+    });
+
     res.json({ message: 'Login successful', user, token });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
@@ -91,33 +100,6 @@ router.put('/update/:id', async (req, res) => {
     res.status(500).json({ message: 'Server error' }); // Send generic error message
   }
 });
-/*
-router.put('/updatePassword', async (req, res) => { 
-  const { email, currentPassword, newPassword } = req.body;
-
-  try {
-    const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: 'User not found' });
-
-    const isMatch = await bcrypt.compare(currentPassword, user.password);
-    if (!isMatch) return res.status(400).json({ message: 'Current password is incorrect' });
-
-    // Hash the new password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newPassword, salt);
-
-    // Update the user's password and prevent double hashing
-    user.password = hashedPassword;
-    user.isModified = () => false; // Prevent `pre-save` from hashing again
-    await user.save();
-
-    res.status(200).json({ message: 'Password updated successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-*/
 
 router.post('/forgot-password', async (req, res) => {
   const { email } = req.body;
@@ -135,8 +117,8 @@ router.post('/forgot-password', async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: 'hitaliabgul@gmail.com',//process.env.EMAIL_USER,  // Make sure EMAIL_USER is configured in .env
-        pass: 'tqnkqoermijmlyvi' //process.env.EMAIL_PASS,  // Make sure EMAIL_PASS is configured in .env
+        user: process.env.EMAIL_USER,//process.env.EMAIL_USER,  // Make sure EMAIL_USER is configured in .env
+        pass: process.env.EMAIL_PASS, //process.env.EMAIL_PASS,  // Make sure EMAIL_PASS is configured in .env
       },
       tls: {
         rejectUnauthorized: false, // Disable certificate validation (not recommended for production)
@@ -144,7 +126,7 @@ router.post('/forgot-password', async (req, res) => {
     });
 
     const mailOptions = {
-      from: 'hitaliabgul@gmail.com',
+      from: process.env.EMAIL_USER,
       to: user.email,
       subject: 'Password Reset',
       html: `<a href="http://localhost:3000/#/reset-password?token=${resetToken}">Click here to reset your password.</a>`,
@@ -214,8 +196,8 @@ router.get('/notes/download/:language', (req, res) => {
 
   // Map language to Google Drive links
   const driveLinks = {
-    english: 'https://drive.google.com/file/d/1pd_BWlzs9Mhd_xcc2xiQHydvwpofYUkD/preview',
-    hindi: 'https://drive.google.com/file/d/1pd_BWlzs9Mhd_xcc2xiQHydvwpofYUkD/view?usp=drive_link',
+    english: 'null',
+    hindi: 'null',
   };
 
   const driveLink = driveLinks[language];
@@ -233,7 +215,7 @@ router.get('/notes/download/:language', (req, res) => {
 
 router.post('/notes/request-physical', (req, res) => {
   const { name, email, contact, address, language, paperQuality, date } = req.body;
-  
+
   // Validate required fields
   if (!name || !email || !contact || !address || !date) {
     return res.status(400).send('All fields are required');
@@ -249,8 +231,8 @@ router.post('/notes/request-physical', (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: 'hitaliabgul@gmail.com',
-      pass: 'tqnkqoermijmlyvi', // Never hard-code sensitive information in production
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS, // Never hard-code sensitive information in production
     },
     tls: {
       rejectUnauthorized: false,
@@ -258,12 +240,12 @@ router.post('/notes/request-physical', (req, res) => {
   });
 
   // Ensure language and paper quality are extracted correctly
-   language ? language.label : 'None'; // If language is not selected, use 'None'
-   paperQuality ? paperQuality.label : 'None'; // If paper quality is not selected, use 'None'
+  language ? language.label : 'None'; // If language is not selected, use 'None'
+  paperQuality ? paperQuality.label : 'None'; // If paper quality is not selected, use 'None'
 
   const mailOptions = {
-    from: 'hitaliabgul@gmail.com',
-    to: 'hitaliabgul@gmail.com', // Send this to the admin email
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_PASS, // Send this to the admin email
     subject: 'New Physical Notes Request',
     text: `Hello,
 
@@ -303,6 +285,7 @@ Thank you`,
     res.status(200).send('Physical notes request received. An email has been sent with the details.');
   });
 });
+
 
 
 
