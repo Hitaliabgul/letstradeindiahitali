@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
 const contactRoutes = require('./routes/contact'); // Import the contact route
+
+const path = require('path'); //this line is added yest
+
+const User = require('./models/user');
 const app=require("./app");
 dotenv.config();
 
@@ -22,6 +26,9 @@ mongoose.connect(process.env.MONGO_URI, {
   .catch((err) => console.log('Error connecting to MongoDB:', err));
 
 // Routes
+const userRoutes = require('./routes/userRoutes'); // Import user routes
+app.use('/api', userRoutes); // Register user routes
+
 app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes); // Route for Contact Us form
 

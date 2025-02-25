@@ -19,15 +19,25 @@ router.post('/register', async (req, res) => {
   const { name, email, phone, password, referralCode } = req.body;
 
   try {
-    let user = await User.findOne({ email });
-    if (user) return res.status(400).json({ message: 'User already exists' });
+    // Check if a user already exists with the same email or phone
+    let existingUser = await User.findOne({ 
+      $or: [{ email: email }, { phone: phone }]
+    });
 
-    user = new User({ name, email, phone, password, referralCode });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User with this email or phone number already exists' });
+    }
+
+    // Create new user
+    const user = new User({ name, email, phone, password, referralCode });
     await user.save();
 
+    // Generate token for authentication
     const token = generateToken(user._id);
-    res.json({ message: 'User registered successfully', user, token });
+
+    res.status(201).json({ message: 'User registered successfully', user, token });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -56,8 +66,8 @@ router.post('/login', async (req, res) => {
     // Store token or user info in cookie with httpOnly flag
     res.cookie('user', token, {
       httpOnly: true,  // Cookie cannot be accessed by JS
-      secure: false,//process.env.NODE_ENV === 'production',  // HTTPS only in production
-      sameSite: 'strict',
+      secure:false ,//process.env.NODE_ENV === 'production',  // HTTPS only in production
+      sameSite:'strict',
       maxAge: 3600000,  // Set cookie expiry time (1 hour)
     });
 
@@ -70,36 +80,7 @@ router.post('/login', async (req, res) => {
 // @route   PUT /api/auth/update/:id
 // @desc    Update user details edit function
 // @access  Public (Consider adding JWT authentication for security)
-router.put('/update/:id', async (req, res) => {
-  const { id } = req.params; // Extract user ID from the URL parameters
-  const { name, email, phone, city, state, telegram, pincode } = req.body; // Extract the new data from the request body
 
-  try {
-    // Find the user by ID
-    let user = await User.findById(id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Update user details with provided data or keep existing if not provided
-    user.name = name !== undefined ? name : user.name;
-    user.email = email !== undefined ? email : user.email;
-    user.phone = phone !== undefined ? phone : user.phone;
-    user.city = city !== undefined ? city : user.city;
-    user.state = state !== undefined ? state : user.state;
-    user.telegram = telegram !== undefined ? telegram : user.telegram;
-    user.pincode = pincode !== undefined ? pincode : user.pincode;
-
-    // Save the updated user data
-    await user.save();
-
-    // Send response with updated user data
-    res.json({ message: 'User details updated successfully', user });
-  } catch (err) {
-    console.error(err); // Log the error for debugging
-    res.status(500).json({ message: 'Server error' }); // Send generic error message
-  }
-});
 
 router.post('/forgot-password', async (req, res) => {
   const { email } = req.body;
@@ -215,7 +196,7 @@ router.get('/notes/download/:language', (req, res) => {
 
 router.post('/notes/request-physical', (req, res) => {
   const { name, email, contact, address, language, paperQuality, date } = req.body;
-
+  
   // Validate required fields
   if (!name || !email || !contact || !address || !date) {
     return res.status(400).send('All fields are required');
@@ -240,8 +221,8 @@ router.post('/notes/request-physical', (req, res) => {
   });
 
   // Ensure language and paper quality are extracted correctly
-  language ? language.label : 'None'; // If language is not selected, use 'None'
-  paperQuality ? paperQuality.label : 'None'; // If paper quality is not selected, use 'None'
+   language ? language.label : 'None'; // If language is not selected, use 'None'
+   paperQuality ? paperQuality.label : 'None'; // If paper quality is not selected, use 'None'
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
