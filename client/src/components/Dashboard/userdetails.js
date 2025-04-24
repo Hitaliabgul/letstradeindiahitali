@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
 
 const UserDetailsClone = () => {
-//   const [userDetails, setUserDetails] = useState(null);
+ const [userDetails, setUserDetails] = useState(null);
 
-//   useEffect(() => {
-//     const fetchUserDetails = async () => {
-//       try {
-//         // Fetch user details from CodeChef API or your own backend
-//         const response = await fetch('https://api.example.com/user-details');
-//         const data = await response.json();
-//         setUserDetails(data);
-//       } catch (error) {
-//         console.error('Error fetching user details:', error);
-//       }
-//     };
+ useEffect(() => {
+   const fetchUserDetails = async () => {
+       try {
+         // Fetch user details from CodeChef API or your own backend
+         const response = await fetch('https://api.example.com/user-details');
+         const data = await response.json();
+        setUserDetails(data);
+       } catch (error) {
+         console.error('Error fetching user details:', error);
+       }
+     }; 
 
-//     fetchUserDetails();
-//   }, []);
+     fetchUserDetails();
+   }, []);
 
-//   if (!userDetails) {
-//     return <div className="text-center">Loading user details...</div>;
-//   }
+   if (!userDetails) {
+     return <div className="text-center">Loading user details...</div>;
+   }
 
   return (
     <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md">

@@ -22,6 +22,7 @@ import PlaylistPage from "./components/PlaylistPage";
 import Reviews from "./components/Review/Reviews";
 import PaymentSuccess from "./components/paymentSuccess";
 import RecordedPage from "./components/Courses/RecordedPage";
+import PaymentDetails from "./components/PaymentDetails";
 function App() {
   const [user, setUser] = useState(null);
   const [cookie, setCookie] = useState(null);
@@ -82,7 +83,9 @@ function App() {
           <Route path="/playlist" element={<PlaylistPage />} />
           <Route path="/playlist/mylearning" element={<MyLearning />} />
           <Route path="/reviews" element={<Reviews />}></Route>
-         <Route path="/paymentSuccess" element={<PaymentSuccess />}></Route>
+          <Route path="/paymentSuccess" element={<PaymentSuccess />}></Route>
+         
+          
          <Route path="/recorded" element={<RecordedPage />} />
         </Route>
       </Routes>

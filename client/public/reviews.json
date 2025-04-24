@@ -1,4 +1,6 @@
 [
+  
+  
   {
     "id": 1,
     "name": "Saloni",
@@ -7,8 +9,24 @@
     "city": "Mumbai",
     "state": "Maharashtra",
     "profession": "Housewife"
+  },
+  {
+    "id": 2,
+    "name": "Saloni",
+    "review": "Let's Trade India has been a game-changer for my trading journey. The course materials are well-structured, making even complex trading concepts easy to understand for beginners. The inclusion of practical examples and real-world case studies made it easier to apply the knowledge in actual trading scenarios. The instructors are highly knowledgeable and always approachable, providing timely support and valuable insights. The platform itself is user-friendly, and features like downloadable notes and detailed modules add great value. Overall, it’s a fantastic investment for anyone looking to build a strong foundation.",
+    "image": "https://i.pravatar.cc/150?img=1",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "profession": "Housewife"
+  },
+  {
+    "id": 3,
+    "name": "Saloni",
+    "review": "Let's Trade India has been a game-changer for my trading journey. The course materials are well-structured, making even complex trading concepts easy to understand for beginners. The inclusion of practical examples and real-world case studies made it easier to apply the knowledge in actual trading scenarios. The instructors are highly knowledgeable and always approachable, providing timely support and valuable insights. The platform itself is user-friendly, and features like downloadable notes and detailed modules add great value. Overall, it’s a fantastic investment for anyone looking to build a strong foundation.",
+    "image": "https://i.pravatar.cc/150?img=1",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "profession": "Housewife"
   }
-
-
   
 ]

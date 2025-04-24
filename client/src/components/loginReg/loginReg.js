@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as Components from './Components.js';
-import { Link, useNavigate, useSearchParams} from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,7 +8,9 @@ import { ToastContainer, toast } from 'react-toastify';
 function LoginReg({ handleLogin }) {
     const [searchParams] = useSearchParams();
     const [signIn, toggle] = React.useState(false);
-    const [name, setName] = useState("");
+    const [firstname, setFirstName] = useState("");
+    const [lastname, setLastName] = useState("");
+
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
@@ -16,7 +18,7 @@ function LoginReg({ handleLogin }) {
     const course = searchParams.get('course');
     const [refer, setRefer] = useState();
     const [loading, setLoading] = useState(false);
-    
+
     useEffect(() => {
         const storedRefer = localStorage.getItem('refer');
         if (storedRefer) {
@@ -27,10 +29,10 @@ function LoginReg({ handleLogin }) {
         if (refer === "null") {
             setRefer("")
         }
-    },[])
-    useEffect(()=>{
+    }, [])
+    useEffect(() => {
         console.log(email);
-    },[email])
+    }, [email])
     const login = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -43,39 +45,39 @@ function LoginReg({ handleLogin }) {
         if (email && password) {
             console.log("running");
             try {
-              //  const loginRes = await axios.post('https://testlt.onrender.com/login', user);
-              const loginRes = await axios.post('http://localhost:5000/api/auth/login', user);  
-              toast.success(loginRes.data.message);
+                //  const loginRes = await axios.post('https://testlt.onrender.com/login', user);
+                const loginRes = await axios.post('http://localhost:5000/api/auth/login', user);
+                toast.success(loginRes.data.message);
                 if (loginRes.data.user) {
                     const User = loginRes.data.user;
-                       // Store user details and token in localStorage
-                //localStorage.setItem("user", JSON.stringify(User));
-                //localStorage.setItem("token", loginRes.data.token);
+                    // Store user details and token in localStorage
+                    //localStorage.setItem("user", JSON.stringify(User));
+                    //localStorage.setItem("token", loginRes.data.token);
 
                     handleLogin(User);
                     setTimeout(() => {
-                        
+
                     }, 4000);
                     let purpose;
                     if (course) {
                         let amount;
                         if (course === "Future") {
                             amount = 2999;
-                            purpose= "Future & Options"
+                            purpose = "Future & Options"
                         }
                         if (course === "InstitutionFootprints") {
                             amount = 4999;
-                            purpose= "Institution Footprints"
+                            purpose = "Institution Footprints"
                         }
                         if (course === "Combined") {
                             amount = 6999;
-                            purpose="Combined"
-                            
+                            purpose = "Combined"
+
                         }
                         const info = {
                             purpose: purpose,
                             amount: amount,
-                            buyer_name: User.name,
+                            buyer_name: User.firstname,
                             email: User.email,
                             phone: User.phone,
                             redirect_url: `https://testlt.onrender.com/payment/callback?user_id=${User._id}`,
@@ -111,7 +113,8 @@ function LoginReg({ handleLogin }) {
         setLoading(true);
         console.log("hii");
         const user = {
-            "name": name,
+            "firstname": firstname,
+            "lastname": lastname,
             "email": email,
             "phone": phone,
             "password": password,
@@ -119,11 +122,11 @@ function LoginReg({ handleLogin }) {
         }
 
         if (email.endsWith('gmail.com')) {
-            if (name && email && password && phone) {
+            if (firstname && email && password && phone) {
                 try {
-                   // const res = await axios.post('https://testlt.onrender.com/reg', user);
-                  const res = await axios.post('http://localhost:5000/api/auth/register', user); 
-                   if (res.data === 'User already exists') {
+                    // const res = await axios.post('https://testlt.onrender.com/reg', user);
+                    const res = await axios.post('http://localhost:5000/api/auth/register', user);
+                    if (res.data === 'User already exists') {
                         toast.error('User already exists');
                     } else {
                         toast.success(res.data);
@@ -187,7 +190,7 @@ function LoginReg({ handleLogin }) {
 
         setLoading(false);
     };
-    
+
     return (
         <div className="flex flex-col items-center justify-center h-[70vh] w-[100%] my-16">
             <ToastContainer className="sticky" />
@@ -195,11 +198,13 @@ function LoginReg({ handleLogin }) {
                 <Components.SignUpContainer signinIn={signIn}>
                     <Components.Form>
                         <Components.Title>Create Account</Components.Title>
-                        <Components.Input type='text' placeholder='Name' value={name} onChange={(e) => setName(e.target.value)} />
+                        <Components.Input type='text' placeholder='First Name' value={firstname} onChange={(e) => setFirstName(e.target.value)} />
+
+                        <Components.Input type='text' placeholder='Last Name' value={lastname} onChange={(e) => setLastName(e.target.value)} />
                         <Components.Input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} />
                         <Components.Input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
                         <Components.Input type='phone' placeholder='Phone' value={phone} onChange={(e) => setPhone(e.target.value)} />
-                        <Components.Input type='refer' placeholder='Referral' value={refer === "null" ? "" : refer} onChange={(e) => { setRefer(e.target.value.toUpperCase()) }} />
+                        <Components.Input type='refer' placeholder='Referral' value={refer === "null" ? "" : refer} />
                         {loading ? ( // Conditionally render a loading screen
                             <Components.Button
                                 onClick={console.log("wait")}
@@ -214,20 +219,20 @@ function LoginReg({ handleLogin }) {
                                 Register
 
                             </Components.Button>)}
-                            <Components.Button className="sm:hidden" onClick={()=>toggle(true)}>Sign In</Components.Button>
+                        <Components.Button className="sm:hidden" onClick={() => toggle(true)}>Sign In</Components.Button>
                     </Components.Form>
                 </Components.SignUpContainer>
 
                 <Components.SignInContainer signinIn={signIn}>
                     <Components.Form>
                         <Components.Title>Sign in</Components.Title>
-                        <Components.Input type='email' placeholder='Email' value={email} onChange={(e) =>{ setEmail(e.target.value.toLowerCase())}} />
+                        <Components.Input type='email' placeholder='Email' value={email} onChange={(e) => { setEmail(e.target.value.toLowerCase()) }} />
                         <Components.Input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
                         {/* <Components.Anchor href='#'>Forgot your password?</Components.Anchor> */}
-                       {/* Link to Update Password */}
-      <Link to="/forgotpassword" className="text-blue-500 hover:underline">
-        Forgot Password?
-      </Link>
+                        {/* Link to Update Password */}
+                        <Link to="/forgotpassword" className="text-blue-500 hover:underline">
+                            Forgot Password?
+                        </Link>
                         {loading ? ( // Conditionally render a loading screen
                             <Components.Button
                                 onClick={console.log("wait")}
@@ -242,7 +247,7 @@ function LoginReg({ handleLogin }) {
                                 Sign In
 
                             </Components.Button>)}
-                            <Components.Button className="sm:hidden" onClick={()=>toggle(false)}>Sign Up</Components.Button>
+                        <Components.Button className="sm:hidden" onClick={() => toggle(false)}>Sign Up</Components.Button>
                     </Components.Form>
                 </Components.SignInContainer>
 
@@ -254,7 +259,7 @@ function LoginReg({ handleLogin }) {
                             <Components.Paragraph>
                                 To keep connected with us please login with your personal info
                             </Components.Paragraph>
-                            
+
                             <Components.GhostButton onClick={() => toggle(true)}>
                                 Sign In
                             </Components.GhostButton>

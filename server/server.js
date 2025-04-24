@@ -31,7 +31,7 @@ app.use('/api', userRoutes); // Register user routes
 
 app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes); // Route for Contact Us form
-
+//app.use("/api/payment", paymentRoutes);
 
 // Serve static files from the 'public' directory
 //app.use('/public', express.static(path.join(__dirname, 'public')));   //this line added extra yest

@@ -2,24 +2,27 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  firstname: { type: String, required: true },
+  lastname: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   phone: { type: String, required: true },
   password: { type: String, required: true },
-  telegram: { type: String, default: '' },  // Add telegram field
-  state: { type: String, default: '' },     // Add state field
-  city: { type: String, default: '' },      // Add city field
-  referralCode: { type: String, default: '',unique: true, },
+  telegram: { type: String, default: '' },
+  whatsapp: { type: String, default: '' },
+  country: { type: String, default: '' },
+  pincode: { type: String, default: '' },
+  state: { type: String, default: '' },
+  city: { type: String, default: '' },
+  referralCode: { type: String, default:null},
+  referralLink: { type: String, default: null }, // Referral link will be updated after a successful action
  
-  
-  // Fields for password reset functionality
-  resetPasswordToken: String,   // Store the reset token
-  resetPasswordExpire: Date,    // Store the expiration date of the reset token
+  resetPasswordToken: String,
+  resetPasswordExpire: Date,
 });
 
 // Hash password before saving the user
 userSchema.pre('save', async function (next) {
-  if (!this.isModified('password') || this.isResettingPassword) return next(); // Skip hashing if already done or if it's a reset password
+  if (!this.isModified('password') || this.isResettingPassword) return next(); 
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();
@@ -32,9 +35,9 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 
 // Method to set reset password token and expiration
 userSchema.methods.setResetPasswordToken = function () {
-  const resetToken = Math.random().toString(36).substring(2); // Example, generate a random token
+  const resetToken = Math.random().toString(36).substring(2);
   this.resetPasswordToken = resetToken;
-  this.resetPasswordExpire = Date.now() + 3600000; // Set token expiration (e.g., 1 hour)
+  this.resetPasswordExpire = Date.now() + 3600000;
   return resetToken;
 };
 

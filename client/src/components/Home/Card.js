@@ -15,7 +15,7 @@ function Card(props) {
       <Link to={props.courseUrl}>Subscribe Now</Link>
       </div>
     </div>
-  );
+  );  
 }
 
 export default Card;

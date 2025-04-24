@@ -727,7 +727,7 @@ padding-bottom: 10px;
 }
 
 .request-notes p {
-  font-size: 18px;  /* Smaller font size for the subtitle */
+  font-size: 22px;  /* Smaller font size for the subtitle */
   color: #7f8c8d;  /* Lighter text color for the subtitle */
   font-style: italic; 
   margin-bottom: 20px;  /* Space below the title */

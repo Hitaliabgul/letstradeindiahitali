@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaAward, FaStickyNote, FaTimes } from 'react-icons/fa';
@@ -20,6 +19,7 @@ import { toast, ToastContainer } from 'react-toastify';
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
+  const [showThankYouPopup, setShowThankYouPopup] = useState(false); // New state for thank you popup
 
   // State for form fields
   const [firstName, setFirstName] = useState('');
@@ -42,6 +42,12 @@ const Navbar = () => {
   const closeContactModal = () => {
     setShowContactModal(false);
   };
+
+  const closeThankYouPopup = () => {
+    setShowThankYouPopup(false);
+    closeContactModal();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -86,12 +92,11 @@ toast.info("Processing your request...");
         setWhatsappNumber('');
         setEmail('');
         setSubject('');
+        setShowThankYouPopup(true); // Show thank you popup
       } else {
         toast.error('Failed to send email. Please try again.');
       }
     } catch (error) {
-
-
       console.error('Error:', error);
       toast.error('An error occurred. Please try again.');
     } finally {
@@ -140,6 +145,11 @@ toast.info("Processing your request...");
       name: 'Contact Us',
       icon: <FaPhoneAlt />,
       onClick: openContactModal,
+    },
+    {
+      path: '/paymentDetails',
+      name: 'details',
+      icon: <FaAward />,
     },
   ];
 
@@ -209,163 +219,183 @@ toast.info("Processing your request...");
           ))}
         </div>
       )}
-      {showContactModal && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-30">
-          <div className="bg-white rounded-lg shadow-lg w-3/4 md:w-1/2 p-6 flex flex-col relative modal-container">
+    {showContactModal && (
+  <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-30">
+    <div className="bg-white rounded-lg shadow-lg w-3/4 md:w-1/2 p-6 flex flex-col relative modal-container">
+      
+      {/* Close Button at the Top */}
+      <button
+        onClick={closeContactModal}
+        className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+        aria-label="Close Modal"
+      >
+        <FaTimes className="text-2xl" /> {/* Close Icon */}
+      </button>
 
-            {/* Close Icon */}
-            <button
-              onClick={closeContactModal}
-              className="cross absolute top-5 right-5 text-gray-500 hover:text-gray-700"
-              aria-label="Close Modal"
-            >
-              <FaTimes className="fatimeicon text-2xl" />
-            </button>
+      {/* Modal Content */}
+      <div className="w-full text-center mb-2">
+        <h2 className="text-xl font-bold text-black-600 mb-2">Get in touch with us</h2>
+        <p className="text-md">Need help or have questions? Fill out the form below, and we’ll get back to you soon.</p>
+        <p className="mb-2 text-md">Thanks for reaching out!</p>
+      </div>
 
-            {/* Top Section with "Let's Trade" Text */}
-            <div className="w-full text-center mb-2">
-              <h2 className="text-xl font-bold text-black-600 mb-2">Get in touch with us</h2>
-              <p className=" text-md">Need help or have questions? Fill out the form below, and we’ll get back to you soon. </p>
-              <p className="mb-2 text-md"> Thanks for reaching out!</p> 
-            </div>
-
-            <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-12">
-              {/* Call Icon and Number */}
-              <div className="flex flex-col items-center text-center">
-                <FaPhoneAlt className="text-black-100 text-xl" />
-                <span className="text-md font-semibold text-black-700">Contact</span>
-                
-                <a href="https://wa.me/919967611652?text=Hi" target="_blank" rel="noopener noreferrer">
-                Mobile: <span className="text-md font-semibold text-blue-500 hover:underline" >+91 9967611652</span>
-</a>
-
-              </div>
-
-              {/* Mail Icon and Email */}
-              <div className="flex flex-col items-center text-center">
-                <FaEnvelope className="text-black-100 text-xl" />
-                <span className="text-md font-semibold text-black-700">E-mail</span>
-                <a
-                  href="mailto:hitaliabgul@gmail.com"
-                 
-                >
-                  Enquiry:<span  className="text-md font-semibold text-blue-500 hover:underline"> letstradeindiaa@gmail.com</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Right Section with Contact Form */}
-            <div className="bg-white-200 rounded-xl p-6 ">
-              <h2 className="text-xl text-black-600 font-bold mb-3">Send us a message</h2>
-              <form className="space-y-4" onSubmit={handleSubmit}>
-
-                {/* First Name and Last Name */}
-                <div className="flex flex-col md:flex-row md:space-x-4">
-                  <div className="flex-1 form-group">
-                    <div className="relative">
-                      <input
-                        type="text"
-                        placeholder="First Name"
-                        className="floating-input w-full p-2 mb-4 md:mb-2 border border-gray-300 rounded"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value.replace(/[^A-Za-z]/g, ''))}
-                      />
-                      <label className="floating-label">First Name*</label>
-                    </div>
-                  </div>
-                  <div className="flex-1 form-group">
-                    <div className="relative">
-                      <input
-                        type="text"
-                        placeholder="Last Name"
-                        className="floating-input w-full p-2 border border-gray-300 rounded"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value.replace(/[^A-Za-z]/g, ''))}
-                      />
-                      <label className="floating-label">Last Name*</label>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Contact and WhatsApp Numbers */}
-                <div className="flex flex-col md:flex-row md:space-x-4">
-                  <div className="flex-1 form-group">
-                    <div className="relative">
-                      <input
-                        type="tel"
-                        placeholder="Contact No."
-                        className="floating-input w-full p-2 mb-4 md:mb-2 border border-gray-300 rounded"
-                        value={contactNumber}
-                        onChange={(e) => setContactNumber(e.target.value.replace(/\D/g, ''))}
-                      />
-                      <label className="floating-label">Contact No.*</label>
-                    </div>
-                  </div>
-                  <div className="flex-1 form-group ">
-                    <div className="relative">
-                      <input
-                        type="tel"
-                        placeholder="WhatsApp No."
-                        className="floating-input w-full p-2 border border-gray-300 rounded"
-                        value={whatsappNumber}
-                        onChange={(e) => setWhatsappNumber(e.target.value)}
-                      />
-                      <label className="floating-label">WhatsApp No.*</label>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="form-group">
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="Email*"
-                      className="floating-input w-full p-2 md:mb-2  border border-gray-300 rounded"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <label className="floating-label">Email*</label>
-                  </div>
-                </div>
-
-                {/* Subject */}
-                <div className="form-group">
-                  <div className="relative">
-                    <textarea
-                      placeholder="Subject"
-                      className="floating-input w-full p-2 border border-gray-300 rounded"
-                      value={subject}
-                      onChange={(e) => setSubject(e.target.value)}
-                      rows="3"
-                    ></textarea>
-                    <label className="floating-label">Subject*</label>
-                  </div>
-                </div>
-
-                {/* Submit and Close Buttons */}
-                <div className="flex justify-between">
-                  <button
-                    type="submit"
-                    className="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded"
-                  >
-                    Submit
-                  </button>
-                  <button
-                    type="button"
-                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={closeContactModal}
-                  >
-                    Close
-                  </button>
-                </div>
-              </form>
-            </div>
-            <ToastContainer />
-          </div>
+      <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-12">
+        {/* Call Icon and Number */}
+        <div className="flex flex-col items-center text-center">
+          <FaPhoneAlt className="text-black-100 text-xl" />
+          <span className="text-md font-semibold text-black-700">WhatsApp</span>
+          <a href="https://wa.me/919967611652?text=Hi" target="_blank" rel="noopener noreferrer">
+            Mobile: <span className="text-md font-semibold text-blue-500 hover:underline">+91 9967611652</span>
+          </a>
         </div>
-      )}
 
+        {/* Mail Icon and Email */}
+        <div className="flex flex-col items-center text-center">
+          <FaEnvelope className="text-black-100 text-xl" />
+          <span className="text-md font-semibold text-black-700">E-mail</span>
+          <a href="mailto:letstradeindiaa@gmail.com">
+            Enquiry: <span className="text-md font-semibold text-blue-500 hover:underline">letstradeindiaa@gmail.com</span>
+          </a>
+        </div>
+      </div>
+
+      {/* Contact Form */}
+      <div className="bg-white-200 rounded-xl p-6">
+        <h2 className="text-xl text-black-600 font-bold mb-3">Send us a message</h2>
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div className="flex flex-col md:flex-row md:space-x-4">
+            <div className="flex-1 form-group">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  className="floating-input w-full p-2 mb-4 md:mb-2 border border-gray-300 rounded"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value.replace(/[^A-Za-z]/g, ''))}
+                />
+                <label className="floating-label">First Name*</label>
+              </div>
+            </div>
+            <div className="flex-1 form-group">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  className="floating-input w-full p-2 border border-gray-300 rounded"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value.replace(/[^A-Za-z]/g, ''))}
+                />
+                <label className="floating-label">Last Name*</label>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row md:space-x-4">
+            <div className="flex-1 form-group">
+              <div className="relative">
+                <input
+                  type="tel"
+                  placeholder="Contact No."
+                  className="floating-input w-full p-2 mb-4 md:mb-2 border border-gray-300 rounded"
+                  value={contactNumber}
+                  onChange={(e) => setContactNumber(e.target.value.replace(/\D/g, ''))}
+                />
+                <label className="floating-label">Contact No.*</label>
+              </div>
+            </div>
+            <div className="flex-1 form-group">
+              <div className="relative">
+                <input
+                  type="tel"
+                  placeholder="WhatsApp No."
+                  className="floating-input w-full p-2 border border-gray-300 rounded"
+                  value={whatsappNumber}
+                  onChange={(e) => setWhatsappNumber(e.target.value)}
+                />
+                <label className="floating-label">WhatsApp No.*</label>
+              </div>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Email*"
+                className="floating-input w-full p-2 md:mb-2 border border-gray-300 rounded"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <label className="floating-label">Email*</label>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <div className="relative">
+              <textarea
+                placeholder="Subject"
+                className="floating-input w-full p-2 border border-gray-300 rounded"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                rows="3"
+              ></textarea>
+              <label className="floating-label">Subject*</label>
+            </div>
+          </div>
+
+          <div className="flex justify-between">
+            <button
+              type="submit"
+              className="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+              onClick={closeContactModal}
+            >
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+      <ToastContainer />
+    </div>
+  </div>
+)}
+{showThankYouPopup && (
+  <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-40">
+    <div className="bg-white rounded-lg shadow-lg w-3/4 md:w-1/3 p-6 flex flex-col items-center relative">
+      
+      {/* Close Button (Cross Icon) */}
+      <button
+        onClick={closeThankYouPopup}
+        className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+        aria-label="Close Popup"
+      >
+        <FaTimes className="text-2xl" /> {/* Cross Icon */}
+      </button>
+
+      {/* Thank You Message */}
+      <h2 className="text-xl font-bold text-black-600 p-2">
+        Thanks for getting in touch! 
+         </h2>
+      <h2 className="text-xl font text-black-600 mb-2 p-2 text-center">
+      
+        We’ve received your message and will respond within 24 hours.
+      </h2>
+      
+      {/* OK Button */}
+      <button
+        onClick={closeThankYouPopup}
+        className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+      >
+        OK
+      </button>
+    </div>
+  </div>
+)}
     </>
   );
 };

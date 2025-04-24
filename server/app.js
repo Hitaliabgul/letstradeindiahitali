@@ -1,6 +1,7 @@
 const express=require("express");
 const cors=require("cors");
 const payment=require("./routes/productRoutes");
+
 const app=express();
 // Allow requests from frontend (localhost:3000)
 app.use(cors({
@@ -13,7 +14,14 @@ app.use(express.urlencoded({extended:true}))
 
 app.use("/api/v1",payment);
 
-module.exports=app;
+//app.use("/api/v1/payment", payments); // Use the payment routes
 
+
+module.exports=app;
+/*
+MONGO_URI=mongodb+srv://hitaliabgul:hitali123@tradeindia.p2unx.mongodb.net/mydatabase?retryWrites=true&w=majority&appName=tradeindiae
+Mongodb connecttion string i have change it to localhost
+
+*/
 
 

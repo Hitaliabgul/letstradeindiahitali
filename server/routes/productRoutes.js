@@ -1,10 +1,10 @@
-const express = require("express");
-const { processPayment, getKey, paymentVerification } = require("../controllers/productController");
-    
+const express = require('express');
 const router = express.Router();
+const { processPayment, getKey, paymentVerification } = require('../controllers/productController');
 
-// Payment processing route
-router.route("/payment/process").post(processPayment);
-router.route("/getKey").get(getKey);
-router.route("/paymentVerification").post(paymentVerification);
+router.post('/payment/process', processPayment);
+router.get('/getKey', getKey);
+router.post('/paymentVerification', paymentVerification);
+
+
 module.exports = router;

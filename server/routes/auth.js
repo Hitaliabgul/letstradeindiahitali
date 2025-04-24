@@ -15,30 +15,35 @@ const generateToken = (id) => {
 // @route   POST /api/auth/register
 // @desc    Register a new user
 // @access  Public
+// Get user details by ID
+
 router.post('/register', async (req, res) => {
-  const { name, email, phone, password, referralCode } = req.body;
-
   try {
-    // Check if a user already exists with the same email or phone
-    let existingUser = await User.findOne({ 
-      $or: [{ email: email }, { phone: phone }]
-    });
+    const { firstname, lastname, email, phone, password, referralCode } = req.body;
 
+    
+    // Check if the user already exists
+    const existingUser = await User.findOne({ $or: [{ email }, { phone }] });
     if (existingUser) {
-      return res.status(400).json({ message: 'User with this email or phone number already exists' });
+      return res.status(400).json({ success: false, message: 'User already exists' });
     }
 
-    // Create new user
-    const user = new User({ name, email, phone, password, referralCode });
-    await user.save();
+    // Create and save the new user
+    const newUser = new User({ firstname, lastname, email, phone, password, referralCode: referralCode === "null" ? null : referralCode });
+    await newUser.save();
 
-    // Generate token for authentication
-    const token = generateToken(user._id);
-
-    res.status(201).json({ message: 'User registered successfully', user, token });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
+    return res.status(201).json({ success: true, message: 'User registered successfully' });
+  } catch (error) {
+    console.error(error);
+    if (error.code === 11000) {
+      // Handle duplicate key error
+      const field = Object.keys(error.keyValue)[0];
+      const errorMessage = `Duplicate key error: ${field} already exists`;
+      res.status(400).json({ success: false, message: errorMessage });
+    } else {
+      // Handle other errors
+      res.status(500).json({ success: false, message: error.message });
+    }
   }
 });
 
@@ -195,10 +200,10 @@ router.get('/notes/download/:language', (req, res) => {
 
 
 router.post('/notes/request-physical', (req, res) => {
-  const { name, email, contact, address, language, paperQuality, date } = req.body;
+  const { firstname, lastname, email, contact, address, language, paperQuality, date } = req.body;
   
   // Validate required fields
-  if (!name || !email || !contact || !address || !date) {
+  if (!firstname|| !lastname || !email || !contact || !address || !date) {
     return res.status(400).send('All fields are required');
   }
 
@@ -232,7 +237,7 @@ router.post('/notes/request-physical', (req, res) => {
 
 A new request for physical notes has been received with the following details:
 
-Name: ${name}
+Name: ${firstname}
 User Email: ${email}
 Contact: ${contact}
 
@@ -267,13 +272,34 @@ Thank you`,
   });
 });
 
+// routes/auth.js
 
 
+router.put("/updateReferralLink", async (req, res) => {
+  const { email, referralLink } = req.body;
 
+  if (!email || !referralLink) {
+    return res.status(400).json({ message: "Email and referral link are required." });
+  }
 
+  try {
+    const user = await User.findOneAndUpdate(
+      { email }, // Use email or userId to identify the user
+      { referralLink },
+      { new: true }
+    );
 
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
 
-
-
+    res.status(200).json({ message: "Referral link updated successfully.", user });
+  } catch (error) {
+    console.error("Error updating referral link:", error);
+    res.status(500).json({ message: "Server error." });
+  }
+});
 
 module.exports = router;
+
+
