@@ -73,7 +73,7 @@ const PaymentSuccess = () => {
         </div>
       )}
 
-      {referralCode && (
+    { /* {referralCode && (
         <div className="mt-4 p-4 bg-white shadow-md rounded-md">
           <p className="text-gray-700">Your Referral Link:</p>
           <input
@@ -94,6 +94,7 @@ const PaymentSuccess = () => {
           </div>
         </div>
       )}
+      */}
     </div>
   );
 };

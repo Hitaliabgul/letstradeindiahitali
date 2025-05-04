@@ -129,12 +129,12 @@ const Dashboard = ({ handleLogout, data }) => {
       toast.error('Failed to update details!');
     }
   };
- const handleCopyReferralCode = () => {
+  const handleCopyReferralCode = () => {
     navigator.clipboard.writeText(user.referralLink);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
   };
-  
+
 
 
   return (
@@ -234,27 +234,53 @@ const Dashboard = ({ handleLogout, data }) => {
                   </button>
                 </div>
               </div>
-             
+
               <div className="mt-4">
-  <label className="text-white font-bold">Your Referral Link:</label>
-  <div className="flex items-center mt-1">
-    <input
-      type="text"
-     className="w-full mr-2 px-2 py-1 rounded border border-gray-300"
-      readOnly
-      value={user.referralLink}
-    />
-    <button
-      onClick={handleCopyReferralCode}
-      className="bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
-    >
-      {isCopied ? 'Copied!' : 'Copy'}
-    </button>
-  </div>
-</div>
+                <label className="text-white font-bold">Your Referral Link:</label>
+                <div className="flex items-center mt-1">
+                  {user.referralLink ? (
+                    <>
+                      <input
+                        type="text"
+                        className="w-full mr-2 px-2 py-1 rounded border border-gray-300"
+                        readOnly
+                        value={user.referralLink}
+                      />
+                      <button
+                        onClick={handleCopyReferralCode}
+                        className="bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
+                      >
+                        {isCopied ? 'Copied!' : 'Copy'}
+                      </button>
+                    </>
+                  ) : (
+                    <input
+                      type="text"
+                      className="w-full mr-2 px-2 py-1 rounded border border-gray-300"
+                      readOnly
+                      value="Buy the course first"
+                    />
+                  )}
+                </div>
+              </div>
 
 
             </div>
+            {user.referralLink && (
+  <div className="mt-8 text-center">
+    <h3 className="text-white font-bold mb-2">Your Referral QR Code:</h3>
+    <div className="inline-block bg-white p-4 rounded">
+      <QRCodeCanvas
+        value={user.referralLink}
+        size={200} // Size of the QR code (in pixels)
+        bgColor="#ffffff" // Background color
+        fgColor="#000000" // QR code color
+        level="H" // Error correction level (L, M, Q, H)
+      />
+    </div>
+  </div>
+)}
+
 
           </div>
         </div>
@@ -264,3 +290,4 @@ const Dashboard = ({ handleLogout, data }) => {
 };
 
 export default Dashboard;
+

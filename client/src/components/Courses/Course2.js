@@ -33,8 +33,10 @@ const loadRazorpay = async (navigate, isLoggedIn, storedUserDetails) => {
     const { data: keyData } = await axios.get("http://localhost:5000/api/v1/getKey");
     const { key } = keyData;
 
-
-    const { data: orderData } = await axios.post("http://localhost:5000/api/v1/payment/process", { amount: 5999 });
+    const courseId = '6627a21cf8ea69c404bd6fa4'; // Hardcode the course ID
+const userId=storedUserDetails._id;
+const courseName="FNO"
+    const { data: orderData } = await axios.post("http://localhost:5000/api/v1/payment/process", { amount: 5999, courseId, userId, courseName});
     const { amount } = orderData;
 
     const options = {
@@ -42,14 +44,14 @@ const loadRazorpay = async (navigate, isLoggedIn, storedUserDetails) => {
       amount,
       currency: "INR",
       name: `${storedUserDetails?.firstname || ""} ${storedUserDetails?.lastname || ""}`,
-      description: "Institution Footprints",
+      description: "FNO",
       image: "/Images/logo.png",
       order_id: orderData.id,
       callback_url: "http://localhost:5000/api/v1/paymentVerification",
       prefill: {
         name: storedUserDetails.name,
         email: storedUserDetails.email,
-        contact: storedUserDetails?.phone || "",
+        contact: storedUserDetails.phone,
       },
       theme: {
         color: "#F46262",

@@ -283,22 +283,37 @@ router.put("/updateReferralLink", async (req, res) => {
   }
 
   try {
-    const user = await User.findOneAndUpdate(
-      { email }, // Use email or userId to identify the user
-      { referralLink },
-      { new: true }
-    );
+    // First, find the user
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(404).json({ message: "User not found." });
     }
 
-    res.status(200).json({ message: "Referral link updated successfully.", user });
+    // Check if referralLink already exists
+    if (user.referralLink) {
+      // If referralLink already exists, don't update it
+      return res.status(200).json({ 
+        message: "Referral link already exists. No update needed.", 
+        referralLink: user.referralLink 
+      });
+    }
+
+    // If referralLink does NOT exist, update it
+    user.referralLink = referralLink;
+    await user.save();
+
+    res.status(200).json({ 
+      message: "Referral link generated successfully.", 
+      referralLink: user.referralLink 
+    });
+
   } catch (error) {
     console.error("Error updating referral link:", error);
     res.status(500).json({ message: "Server error." });
   }
 });
+
 
 module.exports = router;
 

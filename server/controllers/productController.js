@@ -1,16 +1,25 @@
 const razorpay = require("../razorpayInstance");
 const crypto = require("crypto");
+const User=require('../models/user')
 //console.log('Razorpay Instance in Controller:', razorpay);
 const processPayment = async (req, res) => {
-
-
   try {
+    const { amount, courseId, userId, courseName } = req.body; // Expect courseId in the request body
     const options = {
-      amount: Number(req.body.amount) * 100,
+      amount: Number(amount) * 100,  // Amount in paise
       currency: "INR",
-      receipt: `receipt_${Date.now()}`
+      receipt: `receipt_${Date.now()}`,
+      notes: {
+        courseId: courseId,
+        amount:amount,
+        userId:userId,
+        courseName:courseName // Include the course ID here
+      }
     };
-    console.log("Received amount from frontend:", req.body.amount);
+    console.log("Received amount from frontend:", amount);
+    console.log("Received courseId from frontend:", courseId);
+    console.log("Received userid from frontend:", userId);
+    console.log("Received userid from frontend:", courseName);
 
     const order = await razorpay.orders.create(options);
     res.json(order);
@@ -19,7 +28,6 @@ const processPayment = async (req, res) => {
     res.status(500).json({ success: false, message: "Payment order creation failed!" });
   }
 };
-
 
 
 const getKey = async (req, res) => {
@@ -50,9 +58,34 @@ const paymentVerification = async (req, res) => {
 
   console.log('Generated Signature:', generatedSignature);
   console.log('Received Signature:', razorpay_signature);
+  const order = await razorpay.orders.fetch(razorpay_order_id);
+  const courseId = order.notes.courseId;  // Extract courseId from the notes
+  const userId = order.notes.userId;
+const courseName=order.notes.courseName;
+const amount=order.notes.amount;
+  console.log('Course ID from order:', courseId);
+
   const referralCode = razorpay_payment_id.slice(-6);
+
   if (generatedSignature === razorpay_signature) {
-    console.log('Payment verified successfully');
+    // ✅ Add course to the user's purchasedCourses
+    const user = await User.findById(userId);
+    if (user) {
+      const alreadyPurchased = user.purchasedCourses.some(
+        (course) => course.courseId.toString() === courseId
+      );
+
+      if (!alreadyPurchased) {
+        user.purchasedCourses.push({
+          courseId,
+          amount,
+          courseName,
+          paymentId: razorpay_payment_id,
+          purchaseDate: new Date()
+        });
+        await user.save();
+      }
+    }
     // res.redirect(`http://localhost:3000/#/paymentSuccess?reference=${razorpay_payment_id}&refer=${referralCode}`)
     const frontendURL = process.env.CLIENT_URL;
     res.redirect(`${frontendURL}/#/paymentSuccess?reference=${razorpay_payment_id}&refer=${referralCode}`);

@@ -147,7 +147,7 @@ toast.info("Processing your request...");
       onClick: openContactModal,
     },
     {
-      path: '/paymentDetails',
+      path: '/PurchasedCourses',
       name: 'details',
       icon: <FaAward />,
     },

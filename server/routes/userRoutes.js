@@ -49,4 +49,16 @@ router.get('/user/:id', async (req, res) => {
   }
 });
 
+// GET /api/purchased-courses/:userId
+router.get('/purchased-courses/:userId', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    res.status(200).json({ purchasedCourses: user.purchasedCourses });
+  } catch (error) {
+    console.error('Error fetching purchased courses:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 module.exports = router;
