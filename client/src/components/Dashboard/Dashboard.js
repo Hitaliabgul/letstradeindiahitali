@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as CopyIcon } from './copy-icon.svg'; // Replace with your copy icon SVG
 import logoutImg from './logout.svg'
-import EditForm from './EditUser';
 import { ToastContainer } from 'react-toastify';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
-import PaymentSuccess from '../paymentSuccess';
-import { useNavigate } from 'react-router-dom';
 import { QRCodeCanvas } from 'qrcode.react';
 
 const Dashboard = ({ handleLogout, data }) => {
@@ -195,7 +192,7 @@ const Dashboard = ({ handleLogout, data }) => {
                 <div className="col-span-1">
                   <label className="mb-1 text-gray-800 font-bold text-white">State:</label>
                   <Select
-                    className='field'
+                
                     options={states}
                     value={selectedState}
                     onChange={setSelectedState}
@@ -206,7 +203,7 @@ const Dashboard = ({ handleLogout, data }) => {
                 <div className="col-span-1">
                   <label className="mb-1 text-gray-800 font-bold text-white">Country:</label>
                   <Select
-                    className='field'
+                   // className='field'
 
                     options={countries}
                     value={selectedCountry}
@@ -267,19 +264,19 @@ const Dashboard = ({ handleLogout, data }) => {
 
             </div>
             {user.referralLink && (
-  <div className="mt-8 text-center">
-    <h3 className="text-white font-bold mb-2">Your Referral QR Code:</h3>
-    <div className="inline-block bg-white p-4 rounded">
-      <QRCodeCanvas
-        value={user.referralLink}
-        size={200} // Size of the QR code (in pixels)
-        bgColor="#ffffff" // Background color
-        fgColor="#000000" // QR code color
-        level="H" // Error correction level (L, M, Q, H)
-      />
-    </div>
-  </div>
-)}
+              <div className="mt-8 text-center">
+                <h3 className="text-white font-bold mb-2">Your Referral QR Code:</h3>
+                <div className="inline-block bg-white p-4 rounded">
+                  <QRCodeCanvas
+                    value={user.referralLink}
+                    size={200} // Size of the QR code (in pixels)
+                    bgColor="#ffffff" // Background color
+                    fgColor="#000000" // QR code color
+                    level="H" // Error correction level (L, M, Q, H)
+                  />
+                </div>
+              </div>
+            )}
 
 
           </div>

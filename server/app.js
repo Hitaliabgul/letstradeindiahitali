@@ -1,27 +1,29 @@
-const express=require("express");
-const cors=require("cors");
-const payment=require("./routes/productRoutes");
+// app.js
+const express = require("express");
+const cors = require("cors");
+const paymentRoutes = require("./routes/productRoutes");
+const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admin');
+const userRoutes = require('./routes/userRoutes');
+const path = require('path');
 
-const app=express();
-// Allow requests from frontend (localhost:3000)
+const app = express();
+
+// Middleware
 app.use(cors({
-    origin: "http://localhost:3000",  // Allow frontend requests
-    methods: ["GET", "POST","PUT"]
-  }));
+  origin: "http://localhost:3000",
+  methods: ["GET", "POST", "PUT"]
+}));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.urlencoded({extended:true}))
+// Routes
+app.use("/api/v1", paymentRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api', userRoutes);
 
-app.use("/api/v1",payment);
+// Static files (if needed)
+// app.use('/public', express.static(path.join(__dirname, 'public')));
 
-//app.use("/api/v1/payment", payments); // Use the payment routes
-
-
-module.exports=app;
-/*
-MONGO_URI=mongodb+srv://hitaliabgul:hitali123@tradeindia.p2unx.mongodb.net/mydatabase?retryWrites=true&w=majority&appName=tradeindiae
-Mongodb connecttion string i have change it to localhost
-
-*/
-
-
+module.exports = app;

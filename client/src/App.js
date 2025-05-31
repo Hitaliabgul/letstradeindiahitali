@@ -21,10 +21,9 @@ import MyLearning from "./components/MyLearning";
 import PlaylistPage from "./components/PlaylistPage";
 import Reviews from "./components/Review/Reviews";
 import PaymentSuccess from "./components/paymentSuccess";
-import RecordedPage from "./components/Courses/RecordedPage";
-import PaymentDetails from "./components/PaymentDetails";
 import PurchasedCourses from "./components/Courses/PurchasedCourses";
 import AdminUserTable from "./pages/AdminUserTable";
+import Steps from "./components/Steps";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -88,9 +87,10 @@ function App() {
           <Route path="/reviews" element={<Reviews />}></Route>
           <Route path="/paymentSuccess" element={<PaymentSuccess />}></Route>
          
-         <Route path="/recorded" element={<RecordedPage />} />\
-         <Route path="/purchasedcourses" element={<PurchasedCourses />} />
          <Route path="/admin-dashboard/users" element={<AdminUserTable />} />
+         <Route path="/purchasedcourses" element={<PurchasedCourses />} />
+       
+         
         </Route>
       </Routes>
     </HashRouter>

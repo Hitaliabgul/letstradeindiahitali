@@ -67,12 +67,7 @@ body {
   /*color-#1E2A55*/
 }
 
-/* Target FaTh (Dashboard) icon to make it outlined */
-.dashboard-icon {
-  fill: none; /* Remove the default fill */
-  stroke: white; /* Add a stroke color to create the outline */
-  stroke-width: 20; /* Adjust the thickness of the outline */
-}
+
 
 /* Add hover effect for the outlined icon */
 .dashboard-icon:hover {

@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { FaAward, FaStickyNote, FaTimes } from 'react-icons/fa';
 import { FaEnvelope } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
 
 import {
   FaTh,
@@ -75,7 +74,7 @@ toast.info("Processing your request...");
     };
   
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const response = await fetch('http://localhost:5000/api/auth/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

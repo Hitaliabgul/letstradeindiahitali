@@ -6,7 +6,7 @@ const Payment = require('../models/paymentdetails'); // Import the Payment model
 // Update user details
 router.put('/update/:id', async (req, res) => {
   const { id } = req.params;
-  const { firstname, lastname, email, phone, selectedCountry, city, selectedState, telegram, whatsapp, pincode } = req.body;
+  const { firstname, lastname, email, phone, country, city, state, telegram, whatsapp, pincode } = req.body;
 
   try {
     let user = await User.findById(id);
@@ -19,9 +19,9 @@ router.put('/update/:id', async (req, res) => {
     user.lastname = lastname || user.lastname;
     user.email = email || user.email;
     user.phone = phone || user.phone;
-    user.country = selectedCountry || user.country;
+    user.country = country || user.country;
     user.city = city || user.city;
-    user.state = selectedState || user.state;
+    user.state = state || user.state;
     user.telegram = telegram || user.telegram;
     user.whatsapp = whatsapp || user.whatsapp;
     user.pincode = pincode || user.pincode;

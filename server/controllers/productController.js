@@ -1,6 +1,6 @@
 const razorpay = require("../razorpayInstance");
 const crypto = require("crypto");
-const User=require('../models/user')
+const User = require('../models/user')
 //console.log('Razorpay Instance in Controller:', razorpay);
 const processPayment = async (req, res) => {
   try {
@@ -11,9 +11,9 @@ const processPayment = async (req, res) => {
       receipt: `receipt_${Date.now()}`,
       notes: {
         courseId: courseId,
-        amount:amount,
-        userId:userId,
-        courseName:courseName // Include the course ID here
+        amount: amount,
+        userId: userId,
+        courseName: courseName // Include the course ID here
       }
     };
     console.log("Received amount from frontend:", amount);
@@ -61,8 +61,8 @@ const paymentVerification = async (req, res) => {
   const order = await razorpay.orders.fetch(razorpay_order_id);
   const courseId = order.notes.courseId;  // Extract courseId from the notes
   const userId = order.notes.userId;
-const courseName=order.notes.courseName;
-const amount=order.notes.amount;
+  const courseName = order.notes.courseName;
+  const amount = order.notes.amount;
   console.log('Course ID from order:', courseId);
 
   const referralCode = razorpay_payment_id.slice(-6);
@@ -88,7 +88,7 @@ const amount=order.notes.amount;
     }
     // res.redirect(`http://localhost:3000/#/paymentSuccess?reference=${razorpay_payment_id}&refer=${referralCode}`)
     const frontendURL = process.env.CLIENT_URL;
-    res.redirect(`${frontendURL}/#/paymentSuccess?reference=${razorpay_payment_id}&refer=${referralCode}`);
+  res.redirect(`${frontendURL}/#/paymentSuccess?reference=${razorpay_payment_id}&refer=${referralCode}`);
 
   } else {
     console.log('Payment verification failed');

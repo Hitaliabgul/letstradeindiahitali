@@ -7,6 +7,8 @@ const nodemailer = require('nodemailer');
 const path = require('path');
 const router = express.Router();
 const fs = require('fs');
+const app = express();
+require('dotenv').config();
 // Generate a JWT token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' });
@@ -16,12 +18,13 @@ const generateToken = (id) => {
 // @desc    Register a new user
 // @access  Public
 // Get user details by ID
-
+app.use(express.json());
 router.post('/register', async (req, res) => {
+   console.log("Received data:", req.body);
   try {
     const { firstname, lastname, email, phone, password, referralCode } = req.body;
 
-    
+
     // Check if the user already exists
     const existingUser = await User.findOne({ $or: [{ email }, { phone }] });
     if (existingUser) {
@@ -51,6 +54,7 @@ router.post('/register', async (req, res) => {
 // @desc    Authenticate a user & get token
 // @access  Public
 router.post('/login', async (req, res) => {
+  
   const { email, password } = req.body;
 
   try {
@@ -71,8 +75,8 @@ router.post('/login', async (req, res) => {
     // Store token or user info in cookie with httpOnly flag
     res.cookie('user', token, {
       httpOnly: true,  // Cookie cannot be accessed by JS
-      secure:false ,//process.env.NODE_ENV === 'production',  // HTTPS only in production
-      sameSite:'strict',
+      secure: false,//process.env.NODE_ENV === 'production',  // HTTPS only in production
+      sameSite: 'strict',
       maxAge: 3600000,  // Set cookie expiry time (1 hour)
     });
 
@@ -201,9 +205,9 @@ router.get('/notes/download/:language', (req, res) => {
 
 router.post('/notes/request-physical', (req, res) => {
   const { firstname, lastname, email, contact, address, language, paperQuality, date } = req.body;
-  
+
   // Validate required fields
-  if (!firstname|| !lastname || !email || !contact || !address || !date) {
+  if (!firstname || !lastname || !email || !contact || !address || !date) {
     return res.status(400).send('All fields are required');
   }
 
@@ -226,8 +230,8 @@ router.post('/notes/request-physical', (req, res) => {
   });
 
   // Ensure language and paper quality are extracted correctly
-   language ? language.label : 'None'; // If language is not selected, use 'None'
-   paperQuality ? paperQuality.label : 'None'; // If paper quality is not selected, use 'None'
+  language ? language.label : 'None'; // If language is not selected, use 'None'
+  paperQuality ? paperQuality.label : 'None'; // If paper quality is not selected, use 'None'
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -293,9 +297,9 @@ router.put("/updateReferralLink", async (req, res) => {
     // Check if referralLink already exists
     if (user.referralLink) {
       // If referralLink already exists, don't update it
-      return res.status(200).json({ 
-        message: "Referral link already exists. No update needed.", 
-        referralLink: user.referralLink 
+      return res.status(200).json({
+        message: "Referral link already exists. No update needed.",
+        referralLink: user.referralLink
       });
     }
 
@@ -303,9 +307,9 @@ router.put("/updateReferralLink", async (req, res) => {
     user.referralLink = referralLink;
     await user.save();
 
-    res.status(200).json({ 
-      message: "Referral link generated successfully.", 
-      referralLink: user.referralLink 
+    res.status(200).json({
+      message: "Referral link generated successfully.",
+      referralLink: user.referralLink
     });
 
   } catch (error) {
@@ -314,7 +318,43 @@ router.put("/updateReferralLink", async (req, res) => {
   }
 });
 
+router.post('/contact', async (req, res) => {
+  const { firstName, lastName, contactNumber, whatsappNumber, email, subject } = req.body;
 
+  // Create a Nodemailer transporter
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+    tls: {
+      rejectUnauthorized: false  // Disables certificate validation
+    }
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: process.env.RECEIVER_EMAIL,
+    subject: `Contact Form Submission: ${subject}`,
+    text: `
+      Name: ${firstName} ${lastName}
+      Contact Number: ${contactNumber}
+      WhatsApp Number: ${whatsappNumber}
+      Email: ${email}
+      Message: ${subject}
+    `,
+  };
+
+  try {
+    // Send the email
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: 'Email sent successfully!' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ message: 'Failed to send email' });
+  }
+});
 module.exports = router;
 
 

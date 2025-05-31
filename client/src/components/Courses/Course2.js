@@ -34,9 +34,9 @@ const loadRazorpay = async (navigate, isLoggedIn, storedUserDetails) => {
     const { key } = keyData;
 
     const courseId = '6627a21cf8ea69c404bd6fa4'; // Hardcode the course ID
-const userId=storedUserDetails._id;
-const courseName="FNO"
-    const { data: orderData } = await axios.post("http://localhost:5000/api/v1/payment/process", { amount: 5999, courseId, userId, courseName});
+    const userId = storedUserDetails._id;
+    const courseName = "FNO"
+    const { data: orderData } = await axios.post("http://localhost:5000/api/v1/payment/process", { amount: 5999, courseId, userId, courseName });
     const { amount } = orderData;
 
     const options = {
@@ -49,7 +49,7 @@ const courseName="FNO"
       order_id: orderData.id,
       callback_url: "http://localhost:5000/api/v1/paymentVerification",
       prefill: {
-        name: storedUserDetails.name,
+        name: `${storedUserDetails?.firstname || ""} ${storedUserDetails?.lastname || ""}`,
         email: storedUserDetails.email,
         contact: storedUserDetails.phone,
       },
@@ -92,25 +92,6 @@ export default function Course1(data) {
 
   return (
     <>
-      <div className="flex justify-center space-x-1 p-4">
-        <button
-          className={`w-1/6 px-4 py-2 text-center rounded-full font-semibold transition-all duration-300 ${location.pathname === "/course1" ? "bg-gray-600 text-white shadow-md" : "text-gray-700 hover:bg-gray-300 bg-green-400"
-            }`}
-          onClick={() => navigate("/course1")}
-        >
-          Live
-        </button>
-
-        <button
-          className={`w-1/6 px-4 py-2 text-center rounded-full font-semibold transition-all duration-300 ${location.pathname === "/course2" ? "bg-gray-600 text-white shadow-md" : "text-gray-700 hover:bg-gray-300 bg-green-400"
-            }`}
-          onClick={() => navigate("/course2")}
-        >
-          Recorded
-        </button>
-      </div>
-
-      <div className="w-100 h-[3px] bg-gray-400 mt-[-1px]"></div>
 
       <div className="flex justify-around pb-4 py-8 pt-20 max-sm:flex-col max-sm:p-0 max-sm:items-center">
         <div className="flex items-center pl-24 max-sm:p-0">
